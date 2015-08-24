@@ -1,0 +1,25 @@
+@font-face {
+    font-family: allerBold;
+    src: url(/fonts/Aller/Aller_Bd.ttf);
+}
+
+body {
+	background-color: #a0a0a0;
+}
+
+h2 {
+	font-family: allerBold;
+}
+
+.headSection {
+	margin-top: 50px;
+	margin-bottom: 50px;
+	//background-color: green;
+	height: 200px;
+	h2 {
+		padding-left: 50px;
+		padding-top: 20px;
+		padding-bottom: 20px;
+		font-size: 5em;
+	}
+}
