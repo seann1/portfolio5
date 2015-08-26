@@ -1,3 +1,5 @@
+
+
 /**
  * @author mrdoob / http://mrdoob.com/
  * @author supereggbert / http://www.paulbrunt.co.uk/
@@ -2005,14 +2007,9 @@ THREE.CanvasRenderer = function ( parameters ) {
 //end CanvasRenderer
 
 
-
-//$('head').prepend("<script src='http://mrdoob.github.com/three.js/examples/fonts/helvetiker_regular.typeface.js'></script>");
-//$('head').prepend("<script src='assets/js/Aller_Bold.typeface.js'></script>");
-
-
 var scene = new THREE.Scene();
-var camera = new THREE.PerspectiveCamera( 100, $(".headSection").outerWidth() / $(".headSection").outerHeight(), 1, 1000 );
-    camera.position.z = 700;
+var camera = new THREE.PerspectiveCamera( 50, $(".headSection").outerWidth() / $(".headSection").outerHeight(), 1, 1000 );
+    camera.position.z = 50;
     // controls = new THREE.TrackballControls( camera );
     // controls.rotateSpeed = 3.0;
     // controls.zoomSpeed = 1.2;
@@ -2026,20 +2023,23 @@ renderer.setSize( $(".headSection").outerWidth(), $(".headSection").outerHeight(
 document.getElementById('threeD').appendChild( renderer.domElement );
 //document.body.appendChild( renderer.domElement );
 
+var shader = THREE.ShaderLib[ "" ];
+
 var geometry = new THREE.TextGeometry("Sean Niesen", {
 					size: 5,
-					height: .5,
+					height: 3,
 					curveSegments: 20,
 					font: "helvetiker"});
-//var geometry = new THREE.BoxGeometry( 1, 1, 1 );
-var material = new THREE.MeshPhongMaterial( { color: 0xffff00 } );
-//var cube = new THREE.Mesh( geometry, material );
-//var shape = new THREE.TextGeometry("Game Over", { size: 10, height: 5, curveSegments: 6, font: "helvetiker" });
-//var wrapper = new THREE.MeshNormalMaterial({color: 0x660000});
+
+var material = new THREE.MeshPhongMaterial( { color: 0x000000 } );
+
 var cube = new THREE.Mesh( geometry, material );
 scene.add( cube );
-cube.position.x = -20;
+
+
+cube.position.x = -25;
 cube.position.y = -2;
+cube.position.z = -1;
 
     var x = 200;
     var y = 180;
@@ -2080,7 +2080,12 @@ var render = function () {
     lightPosition(lights[5]);
 	requestAnimationFrame( render );
 
-	cube.rotation.x += 0.0005;
+	if (cube.rotation.x < 0.6) {
+		cube.rotation.x += 0.0005;
+		cube.position.z += 0.002;
+		cube.position.y += 0.0005;
+	}
+
 	//cube.rotation.y += 0.005;
 	//controls.update();
 
