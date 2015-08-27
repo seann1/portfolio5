@@ -2006,53 +2006,11 @@ THREE.CanvasRenderer = function ( parameters ) {
 };
 //end CanvasRenderer
 
-
-var uniforms;
-
-
-var vShader = void main()	{
-
-	gl_Position = vec4( position, 1.0 );
-
-}
-
-
-uniform vec2 resolution;
-uniform float time;
-
-var fShader = void main()	{
-
-	vec2 p = -1.0 + 2.0 * gl_FragCoord.xy / resolution.xy;
-	float a = time*40.0;
-	float d,e,f,g=1.0/40.0,h,i,r,q;
-	e=400.0*(p.x*0.5+0.5);
-	f=400.0*(p.y*0.5+0.5);
-	i=200.0+sin(e*g+a/150.0)*20.0;
-	d=200.0+cos(f*g/2.0)*18.0+cos(e*g)*7.0;
-	r=sqrt(pow(abs(i-e),2.0)+pow(abs(d-f),2.0));
-	q=f/r;
-	e=(r*cos(q))-a/2.0;f=(r*sin(q))-a/2.0;
-	d=sin(e*g)*176.0+sin(e*g)*164.0+r;
-	h=((f+d)+a/2.0)*g;
-	i=cos(h+r*p.x/1.3)*(e+e+a)+cos(q*g*6.0)*(r+h/3.0);
-	h=sin(f*g)*144.0-sin(e*g)*212.0*p.x;
-	h=(h+(f-e)*q+sin(r-(a+h)/7.0)*10.0+i/4.0)*g;
-	i+=cos(h*2.3*sin(a/350.0-q))*184.0*sin(q-(r*4.3+a/12.0)*g)+tan(r*g+h)*184.0*cos(r*g+h);
-	i=mod(i/5.6,256.0)/64.0;
-	if(i<0.0) i+=4.0;
-	if(i>=2.0) i=4.0-i;
-	d=r/350.0;
-	d+=sin(d*d*8.0)*0.52;
-	f=(sin(a*g)+1.0)/2.0;
-	gl_FragColor=vec4(vec3(f*i/1.6,i/2.0+d/13.0,i)*d*p.x+vec3(i/1.3+d/8.0,i/2.0+d/18.0,i)*d*(1.0-p.x),1.0);
-
-}
-
-
+    //$container.append(renderer.domElement);
 
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera( 50, $(".headSection").outerWidth() / $(".headSection").outerHeight(), 1, 1000 );
-    camera.position.z = 50;
+    camera.position.z = 2000;
     // controls = new THREE.TrackballControls( camera );
     // controls.rotateSpeed = 3.0;
     // controls.zoomSpeed = 1.2;
@@ -2066,31 +2024,53 @@ renderer.setSize( $(".headSection").outerWidth(), $(".headSection").outerHeight(
 document.getElementById('threeD').appendChild( renderer.domElement );
 //document.body.appendChild( renderer.domElement );
 
-var geometry = new THREE.TextGeometry("Sean Niesen", {
-					size: 5,
-					height: 3,
-					curveSegments: 20,
-					font: "helvetiker"});
-uniforms = {
-	time: { type: "f", value: 1.0 },
-	resolution: { type: "v2", value: new THREE.Vector2() }
+var attributes = {
+	displacement: {
+		type: 'f', // a float
+		value: [] // an empty array
+	}
 };
 
+var uniforms = {
+	amplitude: {
+		type: 'f', // a float
+		value: 0
+	}
+};
+
+var geometry = new THREE.TextGeometry("Sean Niesen", {
+					size: 5,
+					height: 20,
+					curveSegments: 30,
+					font: "helvetiker"});
+
 var material = new THREE.ShaderMaterial( {
+		uniforms: uniforms,
+		attributes: attributes,
+		vertexShader: Shader['client/shaders/vertex2'], //document.getElementById( 'vertexShader' ).textContent,
+		fragmentShader: Shader['client/shaders/fragment2'] //document.getElementById( 'fragmentShader' ).textContent
+		//vertexShader: document.getElementById( 'vertexShader' ).textContent,
+		//fragmentShader: document.getElementById( 'fragmentShader' ).textContent
 
-	uniforms: uniforms,
-	vertexShader: vShader,
-	fragmentShader: fShader
-
-} );
+	});
 
 var cube = new THREE.Mesh( geometry, material );
-scene.add( cube );
 
+var verts = cube.geometry.vertices;
+
+var values = attributes.displacement.value;
+
+var vertDisplace = 1;
+
+for (var v = 0; v < verts.length; v++) {
+  values.push(3);
+}
+
+scene.add( cube );
 
 cube.position.x = -25;
 cube.position.y = -2;
-cube.position.z = -1;
+cube.position.z = -20;
 
     var x = 200;
     var y = 180;
@@ -2109,9 +2089,12 @@ cube.position.z = -1;
 //cube.position.z = -100;
 
 camera.position.z = 5;
-
+var frame = 0;
 var render = function () {
-	    var time;
+	uniforms.amplitude.value = (frame);
+	frame += 0.001;
+
+	var time;
     time = new Date().getTime() * 0.0015;
     function lightPosition(light) {
                 if (light.position.x > -250) {
@@ -2131,15 +2114,11 @@ var render = function () {
     lightPosition(lights[5]);
 	requestAnimationFrame( render );
 
-	if (cube.rotation.x < 0.6) {
+	//if (cube.rotation.x < 0.6) {
 		cube.rotation.x += 0.0005;
 		cube.position.z += 0.002;
 		cube.position.y += 0.0005;
-	}
-
-	//cube.rotation.y += 0.005;
-	//controls.update();
-	uniforms.time.value += 0.05;
+	//}
 
 	renderer.render(scene, camera);
 };
