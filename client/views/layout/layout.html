@@ -3,5 +3,32 @@
 </body>
 
 <template name="layout">
-	{{> yield}}
+	<div class="row">
+		<div class="col-md-10 headSection" id="threeD">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-8">
+		{{> yield}}
+		</div>
+		<div class="col-md-4 homeLink">
+			<div class="row">
+				<a href="{{pathFor 'portfolio'}}">
+					<div class="menuItem1">
+						<p class="menuText1">Work</p>
+					</div>
+				</a>
+			</div>
+			<div class="row">
+				<div class="menuItem2">
+					<p class="menuText2">About</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="menuItem3">
+					<p class="menuText3">Contact</p>
+				</div>
+			</div>
+		</div>
+	</div>
 </template>

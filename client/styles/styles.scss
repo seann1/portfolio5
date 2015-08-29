@@ -5,6 +5,7 @@
 
 body {
 	background-color: #a0a0a0;
+	overflow-x: hidden;
 }
 
 h2 {
@@ -15,11 +16,67 @@ h2 {
 	// margin-top: 50px;
 	margin-bottom: 50px;
 	//background-color: green;
-	height: 200px;
+	// height: 200px;
 	h2 {
 		padding-left: 50px;
 		padding-top: 20px;
 		padding-bottom: 20px;
 		font-size: 5em;
 	}
+}
+
+.homeMenuItem {
+	top: 40px;
+	position: fixed;
+	right: -200px;
+	height: 40px;
+	background-color: yellow;
+	color: black;
+	cursor: pointer;
+	width: 200px;
+	font-size: .5em;
+}
+
+.menuItem1 {
+	position: fixed;
+	right: -400px;
+	height: 80px;
+	width: 400px;
+	background-color: #d8ff00;
+	top: 250px;
+	cursor: pointer;
+	// transform: skewX(-50deg);
+}
+
+.menuItem2 {
+	position: fixed;
+	right: -400px;
+	height: 80px;
+	width: 400px;
+	background-color: #00ff94;
+	top: 350px;
+	cursor: pointer;
+}
+
+.menuItem3 {
+	position: fixed;
+	right: -400px;
+	height: 80px;
+	width: 400px;
+	background-color: #ff0000;
+	top: 450px;
+	cursor: pointer;
+}
+
+.menuText1, .menuText2, .menuText3 {
+	font-size: 3em;
+	margin-left: 20px;
+	color: #bbc107;
+	cursor: pointer;
+	// font-family: allerBold;
+}
+
+.test {
+	background-color: white;
+	height: 100px;
 }
