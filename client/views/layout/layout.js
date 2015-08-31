@@ -9,7 +9,7 @@ Template.home.onRendered(function() {
 		$(".menuItem2").delay(300).animate({right: "+=400"}, 1000);
 		$(".menuItem3").delay(600).animate({right: "+=400"}, 1000);
 	} else {
-		$(".headSection").animate({"height": "400px"}, 1000);
+		$(".headSection").animate({height: "400px"}, 1000);
 		$(".headSection > canvas").animate({height: "400px"}, 1000);
 		$(".menuItem1").animate({right: "+=400"}, 1000).delay(1000).removeClass("arf");
 		$(".menuItem2").delay(300).animate({width: "+=200"}, 1000);
