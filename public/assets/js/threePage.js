@@ -2009,7 +2009,7 @@ THREE.CanvasRenderer = function ( parameters ) {
     //$container.append(renderer.domElement);
 
 var scene = new THREE.Scene();
-var camera = new THREE.PerspectiveCamera( 50, $(".headSection").outerWidth() / $(".headSection").outerHeight(), 1, 1000 );
+var camera = new THREE.PerspectiveCamera( 50, 1073 / 400, 1, 1000 );
     camera.position.z = 2000;
     // controls = new THREE.TrackballControls( camera );
     // controls.rotateSpeed = 3.0;
@@ -2020,7 +2020,7 @@ var camera = new THREE.PerspectiveCamera( 50, $(".headSection").outerWidth() / $
 
 var renderer = new THREE.WebGLRenderer({ alpha: true });
 console.log($(".headSection").outerWidth());
-renderer.setSize( $(".headSection").outerWidth(), $(".headSection").outerHeight() );
+renderer.setSize( 1073, 400 );
 document.getElementById('threeD').appendChild( renderer.domElement );
 //document.body.appendChild( renderer.domElement );
 

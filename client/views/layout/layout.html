@@ -3,11 +3,20 @@
 </body>
 
 <template name="layout">
+	<div class="foldout">
+		<i class="zmdi zmdi-arrow-left"></i>
+	</div>
 	<div class="row">
 		<div class="col-md-10 headSection" id="threeD"></div>
 	</div>
 	<div class="row">
+		<!-- <div class="col-md-6 github"></div> -->
+	</div>
+	<div class="row">
 		<div class="mainContainer">
+			{{#if portfolioTrue}}
+				{{>portfolio}}
+			{{/if}}
 		{{> yield}}
 		</div>
 		<div class="homeLink">

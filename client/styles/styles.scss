@@ -1,3 +1,13 @@
+@keyframes spin {
+    0%  {-webkit-transform: rotate(0deg);}
+    100% {-webkit-transform: rotate(180deg);}   
+}
+
+@keyframes reverseSpin {
+    0%  {-webkit-transform: rotate(180deg);}
+    100% {-webkit-transform: rotate(0deg);}   
+}
+
 @font-face {
     font-family: allerBold;
     src: url(/fonts/Aller/Aller_Bd.ttf);
@@ -14,7 +24,7 @@ h2 {
 
 .headSection {
 	// margin-top: 50px;
-	margin-bottom: 50px;
+	margin-bottom: 20px;
 	//background-color: green;
 	// height: 200px;
 	h2 {
@@ -28,9 +38,9 @@ h2 {
 .homeMenuItem {
 	top: 40px;
 	position: fixed;
-	right: -200px;
+	right: -190px;
 	height: 40px;
-	background-color: yellow;
+	background-color: #e8b900;
 	color: black;
 	cursor: pointer;
 	width: 200px;
@@ -39,7 +49,7 @@ h2 {
 
 .menuItem1 {
 	position: fixed;
-	right: -400px;
+	right: -380px;
 	height: 80px;
 	width: 400px;
 	background-color: #d8ff00;
@@ -50,7 +60,7 @@ h2 {
 
 .menuItem2 {
 	position: fixed;
-	right: -400px;
+	right: -380px;
 	height: 80px;
 	width: 400px;
 	background-color: #00ff94;
@@ -60,7 +70,7 @@ h2 {
 
 .menuItem3 {
 	position: fixed;
-	right: -400px;
+	right: -380px;
 	height: 80px;
 	width: 400px;
 	background-color: #ff0000;
@@ -84,4 +94,39 @@ h2 {
 .portfolioHtml {
 	margin-left: 40px;
 	margin-right: 194px;
+}
+
+.foldout {
+	height: 100px;
+	width: 100px;
+	background-color: #a5ff00;
+	position: fixed;
+	top: 0px;
+	right: 0px;
+	cursor: pointer;
+}
+
+.zmdi-arrow-left {
+	font-size: 6em;
+	color: #00b6ff;
+	margin-left: 22px;
+	margin-top: 8px;
+	-webkit-transform: rotate(0deg);
+}
+
+.spinEffect {
+    animation: spin 0.5s 1 linear;
+}
+
+.reverseSpin {
+	animation: reverseSpin 0.5s 1 linear;
+}
+
+.rotated {
+	-webkit-transform: rotate(180deg);
+}
+
+.github {
+	height: 200px;
+	background-color: black;
 }
