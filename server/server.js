@@ -1,17 +1,27 @@
 if (Meteor.isServer) {
 
-	var github = new GitHub({
-	    version: "3.0.0"     // optional
-	});
+    var github = new GitHub({
+    	version: "3.0.0" // optional
+    });
 
-	Meteor.methods({
-		getRepos: function() {
-			var reposContent = Async.runSync(function(done){
-	           	github.repos.getFromUser({user: "seann1", page[s]: 'all'},function(err, res){
-	            	done(null, res) ;
-	           	}); 
+  	Meteor.methods({
+      	getRepos: function() {
+      		var reposContent = Async.runSync(function(done) {
+	            getRepos = function(error, result) {
+	            	console.log(result);
+
+	                if (github.hasNextPage(result)) {
+	                	github.getNextPage(result, getRepos);
+	                } else {
+	                	//callback(error, result);
+	                	console.log("inside");
+	                	done(null, result);
+	                }
+	                console.log("hi");
+	            }
+	            github.repos.getFromUser({user: "seann1"}, getRepos);
         	});
-        	return reposContent;
-		}
+      		return reposContent.result;
+      	}
 	});
 }
