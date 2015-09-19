@@ -1,19 +1,22 @@
-//var portfolioHtml = "<div class='row portfolioHtml'><div class='col-md-4 test'></div><div class='col-md-4 test'></div><div class='col-md-4 test'></div></div>";
-
 Meteor.startup(function() {
   	$.getScript("assets/js/threePage.js");
+  	Session.set('about', false);
 });
 
-Template.home.onRendered(function() {
+Template.layout.onRendered(function() {
 	$(".headSection").css("height", "400px");
 	$(".headSection > canvas").css("height", "400px");
 	Session.set('portfolio', false);
-
 });
 
 Template.layout.helpers({
 	portfolioTrue: function() {
 		if (Session.get("portfolio") === true) {
+			return true;
+		}
+	},
+	aboutTrue: function() {
+		if (Session.get("about") === true) {
 			return true;
 		}
 	}
@@ -56,7 +59,7 @@ Template.layout.events({
 			$(".headSection").animate({height: "60px", marginBottom: "20px"}, 1000);
 			$(".headSection > canvas").animate({height: "60px"}, 1000);
 			$(".menuItem1").animate({right: "-=400"}, 1000).delay(1000).addClass("arf");
-			$(".menuItem2").delay(300).animate({width: "-=200"}, 1000);
+			$(".menuItem2").delay(300).animate({width: "-=200"}, 1000).addClass("arf");
 			$(".menuItem3").delay(600).animate({width: "-=200"}, 1000);
 
 			$(".menuItem2").animate({top: "90px", height: "-=40", fontSize: ".5em", backgroundColor: "#00ff7f"}, 500);
@@ -74,6 +77,8 @@ Template.layout.events({
 	},
 	'click .menuItem2': function(e, template) {
 		if (!$(".menuItem2").hasClass("arf")) {
+			Session.set('portfolio', false);
+			Session.set('about', true);
 			$(".homeMenuItem").animate({right: "+=210"}, 1000);
 			$(".headSection").animate({height: "60px", marginBottom: "20px"}, 1000);
 			$(".headSection > canvas").animate({height: "60px"}, 1000);
@@ -84,11 +89,19 @@ Template.layout.events({
 			$(".menuItem1").animate({top: "90px", height: "-=40", fontSize: ".5em", backgroundColor: "#00ff7f"}, 500);
 			$(".menuItem3").animate({top: "140px", height: "-=40", fontSize: ".5em", backgroundColor: "#0099ff"}, 500);
 			$(".menuText1, .menuText2, .menuText3").animate({color: "black"}, 500);
+		} else if ($(".menuItem2").height() === 40) {
+			Session.set('portfolio', false);
+			Session.set('about', true);
+			$(".menuItem2").animate({top: "350px", width: "+=200", height: "+=40", fontSize: "1em", backgroundColor: "#00ff7f", right: "-=400"}, 1000);
+			$(".menuItem1").animate({width: "-=200"});
+			$(".menuItem1").animate({top: "90px", height: "-=40", fontSize: ".5em", right: "+=400px", backgroundColor: "#d8ff00"}, 500);
+			$(".menuItem2").addClass("arf");
 		}
 	},
 	'click .homeMenuItem': function(e, template) {
 		if ($(".menuItem1").hasClass("arf")) {
 			Session.set('portfolio', false);
+			Session.set('about', false);
 			$(".homeMenuItem").animate({right: "-=210"}, 300);
 			$(".headSection").animate({height: "400px"}, 1000);
 			$(".headSection > canvas").animate({height: "400px"}, 1000);
@@ -101,6 +114,7 @@ Template.layout.events({
 			$(".menuText1, .menuText2, .menuText3").animate({color: "#bbc107"}, 500);
 		} else if ($(".menuItem2").hasClass("arf")) {
 			Session.set('portfolio', false);
+			Session.set('about', false);
 			$(".homeMenuItem").animate({right: "-=210"}, 300);
 			$(".headSection").animate({height: "400px"}, 1000);
 			$(".headSection > canvas").animate({height: "400px"}, 1000);

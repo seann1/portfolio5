@@ -1,11 +1,17 @@
-var github = new GitHub({
-    version: "3.0.0"     // optional
-});
+if (Meteor.isServer) {
 
-github.repos.getFromUser({
-    user: "seann1"
-}, function(err, res) {
-	for(var i = 0; i < res.length; i++) {
-		console.log(JSON.stringify(res[i].name, null, '\t'));
-	}
-});
+	var github = new GitHub({
+	    version: "3.0.0"     // optional
+	});
+
+	Meteor.methods({
+		getRepos: function() {
+			var reposContent = Async.runSync(function(done){
+	           	github.repos.getFromUser({user: "seann1", page[s]: 'all'},function(err, res){
+	            	done(null, res) ;
+	           	}); 
+        	});
+        	return reposContent;
+		}
+	});
+}
