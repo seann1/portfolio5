@@ -1,23 +1,31 @@
 if (Meteor.isServer) {
+	console.log(process.env);
 
     var github = new GitHub({
     	version: "3.0.0" // optional
     });
 
+    // basic
+	github.authenticate({
+	    type: "basic",
+	    username: Meteor.settings.gitUserName,
+	    password: Meteor.settings.gitPassword
+	});
+
   	Meteor.methods({
       	getRepos: function() {
       		var reposContent = Async.runSync(function(done) {
-	            getRepos = function(error, result) {
-	            	console.log(result);
+      			var allRepos = [];
+	            var getRepos = function(error, result) {
+	            	//console.log(result);
+	            	allRepos.push(result);
+
 
 	                if (github.hasNextPage(result)) {
 	                	github.getNextPage(result, getRepos);
 	                } else {
-	                	//callback(error, result);
-	                	console.log("inside");
-	                	done(null, result);
+	                	done(null, allRepos);
 	                }
-	                console.log("hi");
 	            }
 	            github.repos.getFromUser({user: "seann1"}, getRepos);
         	});

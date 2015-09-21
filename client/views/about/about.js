@@ -1,13 +1,13 @@
 Template.about.onRendered(function() {
-	Meteor.call("getRepos", function(e,r){
-    	Session.set("repos", r.result);
+	Meteor.call("getRepos", function(error,result){
+    	Session.set("repos", result);
     });
 });
 
 Template.about.helpers({
 	'allRepos': function() {
-		console.log(Session.get("repos"));
+		console.log(_.flatten(Session.get("repos"), true));
 		//return Session.get("repos");
-		return Session.get("repos");
+		return _.flatten(Session.get("repos"), true);
 	}
 });
