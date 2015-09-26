@@ -1,11 +1,9 @@
 if (Meteor.isServer) {
-	console.log(process.env);
 
     var github = new GitHub({
     	version: "3.0.0" // optional
     });
 
-    // basic
 	github.authenticate({
 	    type: "basic",
 	    username: Meteor.settings.gitUserName,
