@@ -183,8 +183,70 @@ h2 {
   }
 }
 
+$animation-length: 4s;
+$size: 220px;
+
+.loader {
+  position: relative;
+  display: block;
+  width: $size;
+  height: $size;
+}
+.line {
+  height: $size/45;
+  background: #ccc;
+  margin-bottom: $size/41;  
+  animation: $animation-length load ease-in-out infinite;
+  @for $i from 1 through 21 {
+    &:nth-of-type(#{$i+1}) {
+      animation-delay: -#{$i/10}s;
+    }
+  }
+}
+
+@keyframes load {
+  0% {
+    width: 25%;
+    margin-left: 75%;
+  }
+  25% {
+    width: 1%;
+    margin-left: 50%;
+  }
+  50% {
+    width: 25%;
+    margin-left: 0;
+  }
+  75% {
+    width: 1%;
+    margin-left: 50%;
+  }
+  100% {
+    width: 25%;
+    margin-left: 75%;
+  }
+}
+
 svg {
+	margin-top: 10px;
 	#face {
 		fill: purple;
 	}
+}
+
+.littleMargin {
+	padding-left: 40px;
+}
+
+.gitBlock {
+	margin: 20px;
+	background-color: purple;
+	border-radius: 10px;
+	height: 220px;
+}
+
+.repoNames {
+	font-size: 2em;
+	color: white;
+	text-shadow: 2px 2px #000000;
 }
