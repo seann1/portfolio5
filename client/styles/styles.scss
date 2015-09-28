@@ -249,8 +249,19 @@ svg {
 	font-size: 2em;
 	color: white;
 	text-shadow: 2px 2px #000000;
+	p {
+		line-height: 70%;
+	}
 }
 
+.repoCreatedAt {
+	font-size: 2em;
+	color: white;
+	text-shadow: 2px 2px #000000;
+	p {
+		line-height: 70%;
+	}
+}
 .repoIntro {
 	padding-top: 10px;
 	p {
@@ -258,4 +269,21 @@ svg {
 		font-size: 1.2em;
 		color: white;
 	}
+}
+
+.githubLink {
+	transform: rotate(90deg);
+	position: absolute;
+	left: 175px;
+	top: 115px;
+	a {
+		font-weight: bold;
+		color: #bada55;
+		text-decoration: none;
+		font-size: 1.3em;
+	}
+}
+
+.pushRight {
+	padding-left: 10px;
 }

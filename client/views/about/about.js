@@ -4,26 +4,38 @@ Template.about.onRendered(function() {
     });
 
     function start() {
-    	var counter = 30;
+    	var counter = 2000;
 		var myFunction = function() {
 		    //clearInterval(interval);
-		    var currentName = _.sample(Session.get("repos")).name;
-		    if (counter < 1000) {
+		    var currentRepo = _.sample(Session.get("repos")),
+		    currentCreatedAt = moment(currentRepo.created_at, moment.ISO_8601),
+		    currentName = currentRepo.name;
+		    if (counter < 2000) {
 		    	$(".repoNames").empty();
+		    	$(".repoCreatedAt").empty();
 		    	_.map(currentName, function(letter) {
-		    		$(".repoNames").append("<span>"+letter+"</span>").hide().fadeIn(counter/1.7);
+		    		$(".repoNames").append("<span>"+letter+"</span>").hide().fadeIn(counter/2);
+		    	});
+		    	_.map(currentCreatedAt, function(letter) {
+		    		$(".repoCreatedAt").append("<span>"+letter+"</span>").hide().fadeIn(counter/2);
 		    	});
 		    } else {
 		    	$(".repoNames").find('span').each(function(index, value) {
-    				$(value).fadeOut(_.random(0, 1000));
+    				$(value).fadeOut(_.random(0, 300));
+				});
+				$(".repoCreatedAt").find('span').each(function(index, value) {
+    				$(value).fadeOut(_.random(0, 300));
 				});
 		    	setTimeout(function(){
 			    	_.map(currentName, function(letter) {
-			    		$(".repoNames").append("<span>"+letter+"</span>").hide().fadeIn(counter/2);
+			    		$(".repoNames").append("<span>"+letter+"</span>").hide().fadeIn(counter/4);
 			    	});
-		    	}, 500);
+			    	_.map(currentCreatedAt, function(letter) {
+			    		$(".repoCreatedAt").append("<span>"+letter+"</span>").hide().fadeIn(counter/4);
+			    	});
+		    	}, 200);
 		    }
-		    counter += 30;
+		    counter += 200;
 		    interval = setTimeout(myFunction, counter);
 		}
 		var interval = setTimeout(myFunction, counter);

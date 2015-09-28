@@ -1,12 +1,18 @@
 Meteor.startup(function() {
   	$.getScript("assets/js/threePage.js");
   	Session.set('about', false);
+  	Session.set('threeLoaded', false);
 });
 
 Template.layout.onRendered(function() {
 	$(".headSection").css("height", "400px");
 	$(".headSection > canvas").css("height", "400px");
 	Session.set('portfolio', false);
+
+	setTimeout(function() {
+			Session.set('threeLoaded', true);
+			console.log(Session.get('threeLoaded'));
+	}, 700);
 });
 
 Template.layout.helpers({
@@ -17,6 +23,11 @@ Template.layout.helpers({
 	},
 	aboutTrue: function() {
 		if (Session.get("about") === true) {
+			return true;
+		}
+	},
+	threeLoaded: function() {
+		if (Session.get("threeLoaded") === true) {
 			return true;
 		}
 	}

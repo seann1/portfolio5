@@ -2021,8 +2021,10 @@ var camera = new THREE.PerspectiveCamera( 50, 1073 / 400, 1, 1000 );
 var renderer = new THREE.WebGLRenderer({ alpha: true });
 console.log($(".headSection").outerWidth());
 renderer.setSize( 1073, 400 );
-document.getElementById('threeD').appendChild( renderer.domElement );
-//document.body.appendChild( renderer.domElement );
+$(renderer.domElement).addClass("threeTitle");
+setTimeout(function() {
+	document.getElementById('threeD').appendChild( renderer.domElement );
+}, 1000);
 
 var attributes = {
 	displacement: {
