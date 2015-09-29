@@ -4,49 +4,49 @@ Template.about.onRendered(function() {
     });
 
     function start() {
-    	var counter = 2000;
-		var myFunction = function() {
-		    //clearInterval(interval);
-		    var currentRepo = _.sample(Session.get("repos")),
-		    currentCreatedAt = moment(currentRepo.created_at, moment.ISO_8601),
-		    currentName = currentRepo.name;
-		    if (counter < 2000) {
-		    	$(".repoNames").empty();
-		    	$(".repoCreatedAt").empty();
-		    	_.map(currentName, function(letter) {
-		    		$(".repoNames").append("<span>"+letter+"</span>").hide().fadeIn(counter/2);
-		    	});
-		    	_.map(currentCreatedAt, function(letter) {
-		    		$(".repoCreatedAt").append("<span>"+letter+"</span>").hide().fadeIn(counter/2);
-		    	});
-		    } else {
-		    	$(".repoNames").find('span').each(function(index, value) {
-    				$(value).fadeOut(_.random(0, 300));
+
+	    function displayLoop() {
+	    	var currentRepo = _.sample(Session.get("repos")),
+	    	currentCreatedAt = "Created On " + moment(currentRepo.created_at, moment.ISO_8601).format("MMMM Do, YYYY"),
+	    	currentName = currentRepo.name;
+
+	    	if (currentName.length > 21) {
+	    		$(".repoNames").css("font-size", "1.5em");
+	    	} else {
+	    		$(".repoNames").css("font-size", "2em");
+	    	}
+
+    		_.map(currentName, function(letter) {
+	    		$(".repoNames").append("<span>"+letter+"</span>").hide().fadeIn(500);
+	    	});
+	    	_.map(currentCreatedAt, function(letter) {
+	    		$(".repoCreatedAt").append("<span>"+letter+"</span>").hide().fadeIn(500);
+	    	});
+
+
+			setTimeout(function() {
+				$(".repoNames").find('span').each(function(index, value) {
+					$(value).fadeOut(_.random(0, 500));
 				});
 				$(".repoCreatedAt").find('span').each(function(index, value) {
-    				$(value).fadeOut(_.random(0, 300));
+					$(value).fadeOut(_.random(0, 500));
 				});
-		    	setTimeout(function(){
-			    	_.map(currentName, function(letter) {
-			    		$(".repoNames").append("<span>"+letter+"</span>").hide().fadeIn(counter/4);
-			    	});
-			    	_.map(currentCreatedAt, function(letter) {
-			    		$(".repoCreatedAt").append("<span>"+letter+"</span>").hide().fadeIn(counter/4);
-			    	});
-		    	}, 200);
-		    }
-		    counter += 200;
-		    interval = setTimeout(myFunction, counter);
-		}
-		var interval = setTimeout(myFunction, counter);
+		    }, 4000);
+	    };
 
-    };
+	    displayLoop();
+	    setInterval(function() {
+	    	displayLoop();
+	    }, 4500);
+	};
 
     this.autorun(function() {
 		if (Session.get("repos") != undefined) {
 	    	console.log(Session.get("repos"));
 	    	Session.set("reposLoaded", true);
-	    	start();
+	    	setTimeout(function() {
+	    		start();
+	    	}, 200);
 	    }
 	});
 });
