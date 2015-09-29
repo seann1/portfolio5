@@ -242,7 +242,7 @@ svg {
 	margin: 20px;
 	background-color: purple;
 	border-radius: 10px;
-	height: 220px;
+	height: 300px;
 }
 
 .repoNames {
@@ -274,16 +274,49 @@ svg {
 .githubLink {
 	transform: rotate(90deg);
 	position: absolute;
-	left: 175px;
-	top: 115px;
+	left: 135px;
+	top: 140px;
 	a {
 		font-weight: bold;
 		color: #bada55;
 		text-decoration: none;
-		font-size: 1.3em;
+		font-size: 1.7em;
 	}
 }
 
 .pushRight {
 	padding-left: 10px;
+}
+
+.githubAnimateContainer {
+	height: 4.7em;
+}
+
+.recentCommit {
+	p {
+		color: white;
+		font-size: 1em;
+		margin: 0px;
+		span {
+			color: #bada55;
+			text-shadow: 2px 2px #000000;
+			font-size: 1.2em;
+		}
+		span.repoName {
+			color: #c6a1a1;
+			font-weight: bold;
+		}
+	}
+}
+
+.octocat {
+	svg {
+		height: 130px;
+	}
+}
+
+.githubAvatar {
+	padding-top: 20px;
+	width: 130px;
+    display: block;
 }

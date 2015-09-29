@@ -28,6 +28,18 @@ if (Meteor.isServer) {
 	            github.repos.getFromUser({user: "seann1"}, getRepos);
         	});
       		return reposContent.result;
+      	},
+      	getEvents: function() {
+      		var userEvents = Async.runSync(function(done) {
+      			var getEvents = function(error, result) {
+      				if (result) {
+      					done(null, result);
+      				}
+      			}
+      			github.events.getFromUser({user: "seann1"}, getEvents);
+
+      		});
+      		return userEvents.result;
       	}
 	});
 }
