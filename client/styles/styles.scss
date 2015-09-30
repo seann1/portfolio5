@@ -22,6 +22,10 @@ h2 {
 	font-family: allerBold;
 }
 
+.noPadding {
+	padding: 0px;
+}
+
 .headSection {
 	// margin-top: 50px;
 	margin-bottom: 20px;
@@ -274,8 +278,8 @@ svg {
 .githubLink {
 	transform: rotate(90deg);
 	position: absolute;
-	left: 135px;
-	top: 140px;
+	right: 240px;
+	top: 120px;
 	a {
 		font-weight: bold;
 		color: #bada55;
@@ -323,4 +327,11 @@ svg {
 
 .emoji {
 	height: 1em;
+}
+
+.d3Vis {
+	max-width: 100%;
+	height: 100px;
+	background-color: #9e5a9e;
+	margin-left: 10px;
 }

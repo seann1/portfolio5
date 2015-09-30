@@ -3,7 +3,7 @@
 		<div class="col-md-6 littleMargin">
 			<div class="gitBlock">
 				{{#if reposLoaded}}
-					<div class="col-md-5">
+					<div class="col-md-4">
 						<div class="row octocat">
 							<!-- octocat svg -->
 							<svg xmlns="http://www.w3.org/2000/svg" viewBox="-0.2 -1 379 334">
@@ -29,22 +29,26 @@
 							<img class="githubAvatar" src="{{githubAvatarLink}}">
 						</div>
 					</div>
-					<div class="repoIntro">
-						<p class="githubLink"><a href="http://github.com/seann1" target="_blank">github.com/seann1</a></p>
-						<p class="pushRight">{{repoNumber}} repositories including the following:</p>
-					</div>
-					<div class="githubAnimateContainer">
-						<div class="repoNames pushRight">
+					<div class="col-md-8 noPadding">
+						<div class="repoIntro">
+							<p class="githubLink"><a href="http://github.com/seann1" target="_blank">github.com/seann1</a></p>
+							<p class="pushRight">{{repoNumber}} repositories including the following:</p>
 						</div>
-						<div class="repoCreatedAt pushRight">
+						<div class="githubAnimateContainer">
+							<div class="repoNames pushRight">
+							</div>
+							<div class="repoCreatedAt pushRight">
+							</div>
 						</div>
+						<div class="recentCommit pushRight">
+							<p>Most recent commit:</p>
+							<p><span>{{#emoji}}{{recentCommitMessage}}{{/emoji}}</span></p>
+							<p>To: <span class="repoName">{{recentCommitRepo}}</span></p>
+							<p>On: <span class="repoName">{{recentCommitDate}}</span></p>
+						</div>
+						{{> graph}}
 					</div>
-					<div class="recentCommit pushRight">
-						<p>Most recent commit:</p>
-						<p><span>{{#emoji}}{{recentCommitMessage}}{{/emoji}}</span></p>
-						<p>To: <span class="repoName">{{recentCommitRepo}}</span></p>
-						<p>On: <span class="repoName">{{recentCommitDate}}</span></p>
-					</div>
+
 				{{else}}
 					<div class="loader">
 					    <div class="line"></div>
