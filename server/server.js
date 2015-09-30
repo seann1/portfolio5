@@ -31,15 +31,28 @@ if (Meteor.isServer) {
       	},
       	getEvents: function() {
       		var userEvents = Async.runSync(function(done) {
+            var allEvents = [];
       			var getEvents = function(error, result) {
       				if (result) {
-      					done(null, result);
+                allEvents.push(result);
+      					if (github.hasNextPage(result)) {
+                  github.getNextPage(result, getEvents);
+                } else {
+                  done(null, allEvents);
+                }
       				}
       			}
       			github.events.getFromUser({user: "seann1"}, getEvents);
 
       		});
-      		return userEvents.result;
+
+          function sortCommits(data) {
+            _.each(data, function(commitObject) {
+              
+            });
+
+          }
+      		return {unsorted: userEvents.result, sorted: sortCommits(_.flatten(userEvents.result, true))};
       	}
-	});
+    });
 }
