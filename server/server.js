@@ -59,16 +59,18 @@ if (Meteor.isServer) {
                     } else {
                         commitNum = commitObject.payload.commits.length
                     }
-                    commitHistory.push({"date": moment(commitObject.created_at, moment.ISO_8601).format("MM-DD-YYYY"), "number": commitNum})
+                    if (commitHistory.length === 0) {
+                        commitHistory.push({"date": moment(commitObject.created_at, moment.ISO_8601).format("MM-DD-YYYY"), "number": commitNum})
+                    } else {
+                        if (moment(commitObject.created_at, moment.ISO_8601).format("MM-DD-YYYY") === commitHistory[commitHistory.length-1].date) {
+                            commitHistory[commitHistory.length-1].number += commitNum
+                        } else {
+                            commitHistory.push({"date": moment(commitObject.created_at, moment.ISO_8601).format("MM-DD-YYYY"), "number": commitNum})
+                        }
+                    }
                 });
 
-                function stripDates(data) {
-                    _.map(data, function(item) {
-                        
-                    }
-                }
-
-                return stripDates(commitHistory);
+                return commitHistory;
             }
 
       		return {unsorted: _.flatten(userEvents.result, true), sorted: sortCommits(_.flatten(userEvents.result, true))};
