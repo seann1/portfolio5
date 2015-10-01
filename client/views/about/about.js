@@ -4,8 +4,8 @@ Template.about.onRendered(function() {
 	    	Session.set("repos", _.flatten(result, true));
 	    });
 	    Meteor.call("getEvents", function(error, result){
-	    	Session.set("commits", _.flatten(result.unsorted, true));
-	 		console.log(Session.get("commits"));
+	    	Session.set("commits", result);
+	 		console.log(JSON.stringify(Session.get("commits")));
 	    });
 
 	    function start() {
@@ -68,15 +68,15 @@ Template.about.helpers({
 		return Session.get("repos").length + 1;
 	},
 	'recentCommitMessage': function() {
-		return Session.get("commits")[0].payload.commits[0].message;
+		return Session.get("commits").unsorted[0].payload.commits[0].message;
 	},
 	'recentCommitRepo': function() {
-		return Session.get("commits")[0].repo.name;
+		return Session.get("commits").unsorted[0].repo.name;
 	},
 	'recentCommitDate': function() {
-		return moment(Session.get("commits")[0].created_at, moment.ISO_8601).format("MMMM Do YYYY");
+		return moment(Session.get("commits").unsorted[0].created_at, moment.ISO_8601).format("MMMM Do YYYY");
 	},
 	'githubAvatarLink': function() {
-		return Session.get("commits")[0].actor.avatar_url;
+		return Session.get("commits").unsorted[0].actor.avatar_url;
 	}
 });

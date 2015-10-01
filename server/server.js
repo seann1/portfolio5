@@ -31,28 +31,47 @@ if (Meteor.isServer) {
       	},
       	getEvents: function() {
       		var userEvents = Async.runSync(function(done) {
-            var allEvents = [];
+                var allEvents = [];
       			var getEvents = function(error, result) {
       				if (result) {
-                allEvents.push(result);
+                        console.log(result);
+                        allEvents.push(result);
       					if (github.hasNextPage(result)) {
-                  github.getNextPage(result, getEvents);
-                } else {
-                  done(null, allEvents);
-                }
-      				}
+                            github.getNextPage(result, getEvents);
+                        } else {
+                            done(null, allEvents);
+                        }
+      				} else if (error) {
+                        console.log(error);
+                    }
       			}
       			github.events.getFromUser({user: "seann1"}, getEvents);
 
       		});
 
-          function sortCommits(data) {
-            _.each(data, function(commitObject) {
-              
-            });
+            function sortCommits(data) {
+                var commitHistory = [];
+                _.each(data, function(commitObject) {
+                    var commitNum;
 
-          }
-      		return {unsorted: userEvents.result, sorted: sortCommits(_.flatten(userEvents.result, true))};
+                    if (commitObject.payload.commits === undefined) {
+                        commitNum = 0
+                    } else {
+                        commitNum = commitObject.payload.commits.length
+                    }
+                    commitHistory.push({"date": moment(commitObject.created_at, moment.ISO_8601).format("MM-DD-YYYY"), "number": commitNum})
+                });
+
+                function stripDates(data) {
+                    _.map(data, function(item) {
+                        
+                    }
+                }
+
+                return stripDates(commitHistory);
+            }
+
+      		return {unsorted: _.flatten(userEvents.result, true), sorted: sortCommits(_.flatten(userEvents.result, true))};
       	}
     });
 }
