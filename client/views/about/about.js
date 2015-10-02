@@ -1,59 +1,55 @@
-Template.about.onRendered(function() {
-	if (Session.get("aboutLoaded") != true) {
-		Meteor.call("getRepos", function(error,result){
-	    	Session.set("repos", _.flatten(result, true));
-	    });
-	    Meteor.call("getEvents", function(error, result){
-	    	Session.set("commits", result);
-	    });
+Meteor.startup(function() {
+	Meteor.call("getRepos", function(error,result){
+    	Session.set("repos", _.flatten(result, true));
+    });
+    Meteor.call("getEvents", function(error, result){
+    	Session.set("commits", result);
+    });
 
-	    function start() {
+	function start() {
+	    function displayLoop() {
+	    	var currentRepo = _.sample(Session.get("repos")),
+	    	currentCreatedAt = "Created On " + moment(currentRepo.created_at, moment.ISO_8601).format("MMMM Do, YYYY"),
+	    	currentName = currentRepo.name;
 
-		    function displayLoop() {
-		    	var currentRepo = _.sample(Session.get("repos")),
-		    	currentCreatedAt = "Created On " + moment(currentRepo.created_at, moment.ISO_8601).format("MMMM Do, YYYY"),
-		    	currentName = currentRepo.name;
+	    	if (currentName.length > 21) {
+	    		$(".repoNames").css("font-size", "1.5em");
+	    	} else {
+	    		$(".repoNames").css("font-size", "2em");
+	    	}
 
-		    	if (currentName.length > 21) {
-		    		$(".repoNames").css("font-size", "1.5em");
-		    	} else {
-		    		$(".repoNames").css("font-size", "2em");
-		    	}
-
-	    		_.map(currentName, function(letter) {
-		    		$(".repoNames").append("<span class='animateLetter'>"+letter+"</span>").hide().fadeIn(500);
-		    	});
-		    	_.map(currentCreatedAt, function(letter) {
-		    		$(".repoCreatedAt").append("<span class='animateLetter'>"+letter+"</span>").hide().fadeIn(500);
-		    	});
+    		_.map(currentName, function(letter) {
+	    		$(".repoNames").append("<span class='animateLetter'>"+letter+"</span>").hide().fadeIn(500);
+	    	});
+	    	_.map(currentCreatedAt, function(letter) {
+	    		$(".repoCreatedAt").append("<span class='animateLetter'>"+letter+"</span>").hide().fadeIn(500);
+	    	});
 
 
-				setTimeout(function() {
-					$(".repoNames").find('.animateLetter').each(function(index, value) {
-						$(value).fadeOut(_.random(0, 500));
-					});
-					$(".repoCreatedAt").find('.animateLetter').each(function(index, value) {
-						$(value).fadeOut(_.random(0, 500));
-					});
-			    }, 4000);
-		    };
+			setTimeout(function() {
+				$(".repoNames").find('.animateLetter').each(function(index, value) {
+					$(value).fadeOut(_.random(0, 500));
+				});
+				$(".repoCreatedAt").find('.animateLetter').each(function(index, value) {
+					$(value).fadeOut(_.random(0, 500));
+				});
+		    }, 4000);
+	    };
 
-		    displayLoop();
-		    setInterval(function() {
-		    	displayLoop();
-		    }, 4500);
-		};
+	    displayLoop();
+	    setInterval(function() {
+	    	displayLoop();
+	    }, 4500);
+	};
 
-	    this.autorun(function() {
-			if ((Session.get("repos") != undefined) && (Session.get("commits") != undefined)) {
-		    	Session.set("reposLoaded", true);
-		    	setTimeout(function() {
-		    		start();
-		    	}, 200);
-		    }
-		});
-		Session.set("aboutLoaded", true);
-	}
+    Tracker.autorun(function() {
+		if ((Session.get("repos") != undefined) && (Session.get("commits") != undefined)) {
+	    	Session.set("reposLoaded", true);
+	    	setTimeout(function() {
+	    		start();
+	    	}, 200);
+	    }
+	});
 });
 
 Template.about.helpers({
