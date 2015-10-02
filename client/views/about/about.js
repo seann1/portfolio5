@@ -5,7 +5,6 @@ Template.about.onRendered(function() {
 	    });
 	    Meteor.call("getEvents", function(error, result){
 	    	Session.set("commits", result);
-	 		console.log(JSON.stringify(Session.get("commits")));
 	    });
 
 	    function start() {
@@ -47,7 +46,6 @@ Template.about.onRendered(function() {
 
 	    this.autorun(function() {
 			if ((Session.get("repos") != undefined) && (Session.get("commits") != undefined)) {
-		    	//console.log(Session.get("repos"));
 		    	Session.set("reposLoaded", true);
 		    	setTimeout(function() {
 		    		start();
