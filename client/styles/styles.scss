@@ -26,6 +26,10 @@ h2 {
 	padding: 0px;
 }
 
+.noPaddingRight {
+	padding-right: 0px;
+}
+
 .headSection {
 	// margin-top: 50px;
 	margin-bottom: 20px;
@@ -239,18 +243,18 @@ svg {
 }
 
 .littleMargin {
-	padding-left: 40px;
+	padding-left: 70px;
 }
 
 .gitBlock {
 	margin: 5px;
 	background-color: purple;
 	//border-radius: 10px;
-	height: 300px;
+	height: 150px;
 }
 
 .repoNames {
-	font-size: 2em;
+	font-size: 2.7em;
 	color: white;
 	text-shadow: 2px 2px #000000;
 	p {
@@ -259,18 +263,18 @@ svg {
 }
 
 .repoCreatedAt {
-	font-size: 1.4em;
+	font-size: 1.7em;
 	color: white;
 	text-shadow: 2px 2px #000000;
 	p {
-		line-height: 70%;
+		//line-height: 70%;
 	}
 }
 .repoIntro {
 	padding-top: 10px;
 	p {
 		margin: 0px;
-		font-size: 1.2em;
+		font-size: 1.4em;
 		color: white;
 	}
 }
@@ -278,13 +282,16 @@ svg {
 .githubLink {
 	transform: rotate(90deg);
 	position: absolute;
-	right: 280px;
-	top: 120px;
+	right: 545px;
+	top: 65px;
 	a {
 		font-weight: bold;
-		color: #bada55;
+		color: black;
 		text-decoration: none;
-		font-size: 1.7em;
+		font-size: 1.2em;
+		&:hover {
+        	color:yellow;
+    	}
 	}
 }
 
@@ -320,8 +327,9 @@ svg {
 }
 
 .githubAvatar {
-	padding-top: 20px;
-	width: 130px;
+	padding-top: 30px;
+	//right: 30px;
+	width: 120px;
     display: block;
 }
 
