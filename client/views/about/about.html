@@ -46,7 +46,6 @@
 							<p>To: <span class="repoName">{{recentCommitRepo}}</span></p>
 							<p>On: <span class="repoName">{{recentCommitDate}}</span></p>
 						</div>
-						{{> graph}}
 					</div>
 
 				{{else}}
@@ -76,6 +75,11 @@
 					</div>
 				{{/if}}
 			</div> <!-- end gitBlock -->
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-10">
+			{{> graph}}
 		</div>
 	</div>
 </template>

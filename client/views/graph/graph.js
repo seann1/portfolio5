@@ -1,8 +1,8 @@
 Template.graph.onRendered(function() {
 
 	function createGraph(data) {
-		var margin = {top: 10, right: 10, bottom: 20, left: 40},
-	    width = 800 - margin.left - margin.right,
+		var margin = {top: 10, right: 10, bottom: 30, left: 20},
+	    width = $(".d3Vis").width() - margin.left - margin.right,
 	    height = $(".d3Vis").height() - margin.top - margin.bottom;
 
 		var parseDate = d3.time.format("%m-%d-%Y").parse;
