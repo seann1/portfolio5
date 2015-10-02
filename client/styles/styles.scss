@@ -254,22 +254,27 @@ svg {
 }
 
 .repoNames {
-	font-size: 2.7em;
+	font-size: 4.0em;
 	color: white;
 	text-shadow: 2px 2px #000000;
+	height: 70px;
 	p {
 		line-height: 70%;
 	}
 }
 
 .repoCreatedAt {
-	font-size: 1.7em;
-	color: white;
+	font-size: 1em;
+	color: #9e9e9e;
 	text-shadow: 2px 2px #000000;
-	p {
-		//line-height: 70%;
-	}
 }
+
+.repoUpdatedAt {
+	font-size: 1em;
+	color: #9e9e9e;
+	text-shadow: 2px 2px #000000;
+}
+
 .repoIntro {
 	padding-top: 10px;
 	p {

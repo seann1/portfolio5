@@ -1,6 +1,7 @@
 Meteor.startup(function() {
 	Meteor.call("getRepos", function(error,result){
     	Session.set("repos", _.flatten(result, true));
+    	console.log(Session.get("repos"));
     });
     Meteor.call("getEvents", function(error, result){
     	Session.set("commits", result);
@@ -9,13 +10,14 @@ Meteor.startup(function() {
 	function start() {
 	    function displayLoop() {
 	    	var currentRepo = _.sample(Session.get("repos")),
-	    	currentCreatedAt = "Created On " + moment(currentRepo.created_at, moment.ISO_8601).format("MMMM Do, YYYY"),
+	    	currentCreatedAt = "Created On " + moment(currentRepo.created_at, moment.ISO_8601).format("M-D-YYYY"),
+	    	currentUpdatedAt = "Modified On " + moment(currentRepo.updated_at, moment.ISO_8601).format("M-D-YYYY"),
 	    	currentName = currentRepo.name;
 
-	    	if (currentName.length > 21) {
-	    		$(".repoNames").css("font-size", "1.5em");
+	    	if (currentName.length > 15) {
+	    		$(".repoNames").css("font-size", "2.2em");
 	    	} else {
-	    		$(".repoNames").css("font-size", "2em");
+	    		$(".repoNames").css("font-size", "3.2em");
 	    	}
 
     		_.map(currentName, function(letter) {
@@ -24,13 +26,25 @@ Meteor.startup(function() {
 	    	_.map(currentCreatedAt, function(letter) {
 	    		$(".repoCreatedAt").append("<span class='animateLetter'>"+letter+"</span>").hide().fadeIn(500);
 	    	});
+	    	_.map(currentUpdatedAt, function(letter) {
+	    		$(".repoUpdatedAt").append("<span class='animateLetter'>"+letter+"</span>").hide().fadeIn(500);
+	    	});
 
 
 			setTimeout(function() {
 				$(".repoNames").find('.animateLetter').each(function(index, value) {
 					$(value).fadeOut(_.random(0, 500));
 				});
+				$(".createdAtWord").find('.animateLetter').each(function(index, value) {
+					$(value).fadeOut(_.random(0, 500));
+				});
+				$(".updatedAtWord").find('.animateLetter').each(function(index, value) {
+					$(value).fadeOut(_.random(0, 500));
+				});
 				$(".repoCreatedAt").find('.animateLetter').each(function(index, value) {
+					$(value).fadeOut(_.random(0, 500));
+				});
+				$(".repoUpdatedAt").find('.animateLetter').each(function(index, value) {
 					$(value).fadeOut(_.random(0, 500));
 				});
 		    }, 4000);
