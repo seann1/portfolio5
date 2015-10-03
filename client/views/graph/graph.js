@@ -1,49 +1,65 @@
 Template.graph.onRendered(function() {
 
 	function createGraph(data) {
-		var margin = {top: 10, right: 10, bottom: 30, left: 20},
-	    width = $(".d3Vis").width() - margin.left - margin.right,
-	    height = $(".d3Vis").height() - margin.top - margin.bottom;
 
 		var parseDate = d3.time.format("%m-%d-%Y").parse;
 
+		data.forEach(function(d) {
+	    	d.date = parseDate(d.date);
+	    	d.number = +d.number;
+	    });
+
+		var margin = {top: 5, right: 30, bottom: 60, left: 20},
+	    width = $(".d3Vis").width() - margin.left - margin.right,
+	    height = $(".d3Vis").height() - margin.top - margin.bottom;
+
+	    var xMin = d3.min(data, function(d) {
+	    	return Math.min(d.date);
+	    });
+
+	    var xMax = d3.max(data, function(d) {
+	    	return Math.max(d.date);
+	    });
+
 		var x = d3.time.scale()
-		    .range([0, width]);
+			.domain([xMin, xMax])
+			.range([0, width]);
 
 		var y = d3.scale.linear()
+			.domain([0, d3.max(data, function(d) { return d.number; })])
 		    .range([height, 0]);
 
 		var xAxis = d3.svg.axis()
 		    .scale(x)
-		    .orient("bottom");
+		    .orient("bottom")
+		    //.ticks(30)
+			.tickSize(10, 0, 0);
 
 		var yAxis = d3.svg.axis()
 		    .scale(y)
-		    .orient("left");
-
-		var line = d3.svg.line()
-		    .x(function(d) { return x(d.date); })
-		    .y(function(d) { return y(d.number); });
+		    .orient("left")
+		    //.ticks(10);
 
 		var svg = d3.select(".d3Vis").append("svg")
-			.data(data)
+			//.data(data)
 		    .attr("width", width + margin.left + margin.right)
 		    .attr("height", height + margin.top + margin.bottom)
 		    .append("g")
 		    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-	    data.forEach(function(d) {
-	    	d.date = parseDate(d.date);
-	    	d.number = +d.number;
-	    });
-
-		x.domain(d3.extent(data, function(d) { return d.date; }));
-		y.domain(d3.extent(data, function(d) { return d.number; }));
+			//x.domain(data.map(function(d) { return d.date; }));
+  			//y.domain([0, d3.max(data, function(d) { return d.number; })]);
 
 	    svg.append("g")
-	        .attr("class", "x axis")
+	        .attr("class", "x axis white")
 	        .attr("transform", "translate(0," + height + ")")
-	        .call(xAxis);
+	        .call(xAxis)
+	        .selectAll("text")
+		    .attr("y", 15)
+		    .attr("x", 7)
+		    .attr("dy", ".20em")
+		    .attr("transform", "rotate(45)")
+		    .style("text-anchor", "start");
 
 	    svg.append("g")
 	        .attr("class", "y axis")
@@ -51,14 +67,22 @@ Template.graph.onRendered(function() {
 	    	.append("text")
 	        .attr("transform", "rotate(-90)")
 	        .attr("y", 6)
-	        .attr("dy", ".71em")
+	        .attr("dy", ".66em")
 	        .style("text-anchor", "end")
 	        .text("Commits");
 
-	    svg.append("path")
-	        .datum(data)
-	        .attr("class", "line")
-	        .attr("d", line);
+	    var barWidth = width / data.length;
+
+		svg.selectAll("bar")
+		      .data(data)
+		      .enter().append("rect")
+		      .style("fill", "black")
+		      .attr("transform", function(d, i) { return "translate(" + (i * barWidth) + 2 + ",-2)"; })
+		      .attr("x", function(d) { return x(d.date); })
+		      .attr("width", barWidth)
+		      .attr("y", function(d) { return y(d.number); })
+		      .attr("height", function(d) { return height - y(d.number); });
+
 	}
 
 	this.autorun(function() {
