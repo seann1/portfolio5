@@ -59,15 +59,28 @@ if (Meteor.isServer) {
                     } else {
                         commitNum = commitObject.payload.commits.length
                     }
+
                     if (commitHistory.length === 0) {
                         commitHistory.push({"date": moment(commitObject.created_at, moment.ISO_8601).format("MM-DD-YYYY"), "number": commitNum})
                     } else {
-                        if (moment(commitObject.created_at, moment.ISO_8601).format("MM-DD-YYYY") === commitHistory[commitHistory.length-1].date) {
-                            commitHistory[commitHistory.length-1].number += commitNum
-                        } else if (commitHistory[commitHistory.length-1].date !== moment(commitObject.created_at, moment.ISO_8601).add('days', 1).format("MM-DD-YYYY")) {
-                            commitHistory.push({"date": moment(commitHistory[commitHistory.length-1].date, "MM-DD-YYYY").subtract('days', 1).format("MM-DD-YYYY"), "number": 0})
+                        var currentDateAddOne = moment(commitObject.created_at, moment.ISO_8601).add('days', 1).format("MM-DD-YYYY");
+                        var currentDateSubtractOne = moment(commitHistory[commitHistory.length-1].date, "MM-DD-YYYY").subtract('days', 1).format("MM-DD-YYYY");
+                        var endOfCHistory = commitHistory[commitHistory.length-1];
+
+                        if (moment(commitObject.created_at, moment.ISO_8601).format("MM-DD-YYYY") === endOfCHistory.date) {
+                            console.log("same");
+                            endOfCHistory.number += commitNum;
+                        } else if (endOfCHistory.date !== currentDateAddOne) {
+                            console.log(endOfCHistory.date, currentDateAddOne);
+
+                            while(commitHistory[commitHistory.length-1].date !== currentDateAddOne) {
+                              console.log(endOfCHistory.date, currentDateAddOne);
+                              commitHistory.push({"date": moment(commitHistory[commitHistory.length-1].date, "MM-DD-YYYY").subtract('days', 1).format("MM-DD-YYYY"), "number": 0});
+                            }
+                            commitHistory.push({"date": moment(commitObject.created_at, moment.ISO_8601).format("MM-DD-YYYY"), "number": commitNum});
+
                         } else {
-                            commitHistory.push({"date": moment(commitObject.created_at, moment.ISO_8601).format("MM-DD-YYYY"), "number": commitNum})
+                            commitHistory.push({"date": moment(commitObject.created_at, moment.ISO_8601).format("MM-DD-YYYY"), "number": commitNum});
                         }
                     }
                 });
