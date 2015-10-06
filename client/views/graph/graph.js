@@ -9,7 +9,7 @@ Template.graph.onRendered(function() {
 	    	d.number = +d.number;
 	    });
 
-		var margin = {top: 5, right: 30, bottom: 60, left: 20},
+		var margin = {top: 5, right: 0, bottom: 60, left: 20},
 	    width = $(".d3Vis").width() - margin.left - margin.right,
 	    height = $(".d3Vis").height() - margin.top - margin.bottom;
 
@@ -41,10 +41,11 @@ Template.graph.onRendered(function() {
 		    //.ticks(10);
 
 		var svg = d3.select(".d3Vis").append("svg")
-			//.data(data)
+			.data(data)
 		    .attr("width", width + margin.left + margin.right)
 		    .attr("height", height + margin.top + margin.bottom)
 		    .append("g")
+		    .attr("width", width + margin.left + margin.right)
 		    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 			//x.domain(data.map(function(d) { return d.date; }));
@@ -65,6 +66,7 @@ Template.graph.onRendered(function() {
 	        .attr("class", "y axis")
 	        .call(yAxis)
 	    	.append("text")
+	    	.attr("width", width + margin.left + margin.right)
 	        .attr("transform", "rotate(-90)")
 	        .attr("y", 6)
 	        .attr("dy", ".66em")
@@ -77,7 +79,7 @@ Template.graph.onRendered(function() {
 		      .data(data)
 		      .enter().append("rect")
 		      .style("fill", "black")
-		      .attr("transform", function(d, i) { return "translate(" + (i * barWidth) + 2 + ",-2)"; })
+		      //.attr("transform", function(d, i) { return "translate(" + (i * barWidth) + 2 + ",-2)"; })
 		      .attr("x", function(d) { return x(d.date); })
 		      .attr("width", barWidth)
 		      .attr("y", function(d) { return y(d.number); })
