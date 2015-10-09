@@ -1,0 +1,1 @@
+GithubEvents = new Meteor.Collection('githubEvents', {});

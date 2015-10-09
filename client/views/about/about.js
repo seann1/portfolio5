@@ -1,11 +1,9 @@
 Meteor.startup(function() {
-	Meteor.call("getRepos", function(error,result){
-    	Session.set("repos", _.flatten(result, true));
-    	console.log(Session.get("repos"));
-    });
-    Meteor.call("getEvents", function(error, result){
-    	Session.set("commits", result);
-    });
+	Meteor.call("setupGit", function(error, result) {
+		Session.set("repos", result.repos);
+		Session.set("commits", result.events);
+		Session.set("reposLoaded", true);
+	});
 
 	function start() {
 	    function displayLoop() {
