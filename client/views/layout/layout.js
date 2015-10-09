@@ -1,7 +1,14 @@
 Meteor.startup(function() {
+	
   	$.getScript("assets/js/threePage.js");
   	Session.set('about', false);
   	Session.set('threeLoaded', false);
+
+  	Meteor.call("setupGit", function(error, result) {
+		Session.set("repos", result.repos);
+		Session.set("commits", result.events);
+		Session.set("reposLoaded", true);
+	});
 });
 
 Template.layout.onRendered(function() {

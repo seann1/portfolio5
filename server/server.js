@@ -27,14 +27,14 @@ Meteor.methods({
             github.repos.getFromUser({user: "seann1"}, getRepos);
         });
         GithubRepos.insert({git: _.flatten(reposContent.result, true), date: new Date()});
-        return reposContent.result;
+        return _.flatten(reposContent.result, true);
       },
       getEvents: function() {
         var userEvents = Async.runSync(function(done) {
               var allEvents = [];
           var getEvents = function(error, result) {
             if (result) {
-                      console.log(result);
+                      //console.log(result);
                       allEvents.push(result);
               if (github.hasNextPage(result)) {
                           github.getNextPage(result, getEvents);
@@ -68,7 +68,7 @@ Meteor.methods({
                       var endOfCHistory = commitHistory[commitHistory.length-1];
 
                       if (moment(commitObject.created_at, moment.ISO_8601).format("MM-DD-YYYY") === endOfCHistory.date) {
-                          console.log("same");
+                          //console.log("same");
                           endOfCHistory.number += commitNum;
                       } else {
                           commitHistory.push({"date": moment(commitObject.created_at, moment.ISO_8601).format("MM-DD-YYYY"), "number": commitNum});
@@ -83,14 +83,4 @@ Meteor.methods({
         GithubEvents.insert(eventResult);
         return eventResult;
       }
-      // setupGit: function() {
-
-      //   var repos = GithubRepos.find().sort({"date": -1}).limit(1);
-      //   var events = GithubEvents.find().sort({"date": -1}).limit(1);
-      //   GithubRepos.remove({ _id : { $nin: repos._id }});
-      //   GithubEvents.remove({ _id : { $nin: events._id }});
-
-      //   return {repos: repos, events: events};
-
-      // }
-  });
+});

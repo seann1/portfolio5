@@ -1,9 +1,4 @@
 Meteor.startup(function() {
-	Meteor.call("setupGit", function(error, result) {
-		Session.set("repos", result.repos);
-		Session.set("commits", result.events);
-		Session.set("reposLoaded", true);
-	});
 
 	function start() {
 	    function displayLoop() {
