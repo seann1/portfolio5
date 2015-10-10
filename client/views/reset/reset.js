@@ -9,4 +9,4 @@ Template.reset.events({
 	    	//console.log(Session.get("commits"));
 	    });
 	}
-})
+});
