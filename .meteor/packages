@@ -4,7 +4,6 @@
 # 'meteor add' and 'meteor remove' will edit this file for you,
 # but you can also edit it by hand.
 
-meteor-platform
 autopublish
 insecure
 jquery
@@ -17,9 +16,24 @@ bruz:github-api
 meteorhacks:npm
 
 
-npm-container
 ixdi:material-design-iconic-font
 natestrauser:animate-css
 momentjs:moment
 davidfrancisco:twemoji
 d3js:d3
+standard-minifiers
+meteor-base
+mobile-experience
+mongo
+blaze-html-templates
+session
+tracker
+logging
+reload
+random
+ejson
+spacebars
+check
+
+
+npm-container
