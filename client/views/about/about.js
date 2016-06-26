@@ -52,6 +52,7 @@ Meteor.startup(function() {
     Tracker.autorun(function() {
 		if ((Session.get("repos") != undefined) && (Session.get("commits") != undefined)) {
 	    	Session.set("reposLoaded", true);
+	    	Session.set("eventsLoaded", true);
 	    	setTimeout(function() {
 	    		start();
 	    	}, 200);
@@ -61,7 +62,7 @@ Meteor.startup(function() {
 
 Template.about.helpers({
 	'reposLoaded': function() {
-		if (Session.get("reposLoaded") === true) {
+		if (Session.get("reposLoaded") === true && Session.get("eventsLoaded") === true) {
 			return true
 		}
 	},

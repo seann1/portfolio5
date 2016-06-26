@@ -1,18 +1,19 @@
 GithubRepos = new Meteor.Collection('githubRepos', {});
 
 Meteor.methods({
-	setupGit: function() {
-        //var countRepos = GithubRepos.find().count();
-        //var countEvents = GithubEvents.find().count();
-        var repos = GithubRepos.find({}, {sort: {date: -1}}).fetch();
-        var events = GithubEvents.find({}, {sort: {date: -1}}).fetch();
-        if (repos != undefined && events != undefined) {
-            var currentGitObject = {repos: repos.git, events: events};
+	setupGitRepos: function() {
+        var countRepos = GithubRepos.find({});
+        //console.log(countRepos);
+        if (countRepos > 1) {
+            var repos = GithubRepos.find({}, {sort: {date: -1}}).fetch();
+
+            var currentGitObject = repos;
+            //console.log(currentGitObject);
             return currentGitObject; 
         }
 
     },
-    cleanupGit: function() {
+    cleanupGitRepos: function() {
         // if (GithubEvents.find().count() > 2) {
         //     _.map(events.splice(0,1), function(value) {
         //         GithubEvents.remove({ _id : value._id });
