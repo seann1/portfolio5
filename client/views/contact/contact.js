@@ -18,5 +18,15 @@ Template.layout.events({
 		    //Browser has blocked it
 		    alert('Please allow popups for this website');
 		}
+	},
+	'click .emailLink': function(e, template) {
+		var win = window.open('mailto:seanniesen@gmail.com');
+		if (win) {
+		    //Browser has allowed it to be opened
+		    win.focus();
+		} else {
+		    //Browser has blocked it
+		    alert('Please allow popups for this website');
+		}
 	}
 });
