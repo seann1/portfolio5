@@ -3,8 +3,8 @@ Template.reset.events({
 		Meteor.call("getRepos", function(error,result){
 	    	Session.set("repos", result);
 	    });
-	    Meteor.call("getEvents", function(error, result){
-	    	Session.set("commits", result);
-	    });
+	    // Meteor.call("getEvents", function(error, result){
+	    // 	Session.set("commits", result);
+	    // });
 	}
 });

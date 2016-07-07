@@ -29,16 +29,81 @@ Meteor.methods({
     var reposContent = Meteor.wrapAsync(makeGitHubApiCall);
     var reposResult = reposContent();
     GithubRepos.remove({});
-    //GithubRepos.insert({git: _.flatten(reposResult, true).name, date: new Date()});
-    console.log(typeof(reposResult));
+
+    console.log(JSON.stringify(_.flatten(reposResult)[0]));
+
     var currentRepos = [];
-    for(var i = 0; i < reposResult[0].length; i++)
+    for(var i = 0; i < _.flatten(reposResult).length; i++)
     { 
-      currentRepos.push({git: _.flatten(reposResult[0])[i].name, date: new Date()});
-      GithubRepos.insert({git: _.flatten(reposResult[0])[i].name, date: new Date()});
+      console.log(_.flatten(reposResult)[i].name);
+      var repo = _.flatten(reposResult)[i];
+      var repoObject = {name: repo.name, url: repo.html_url, updated: repo.updated_at, description: repo.description};
+      currentRepos.push(repoObject);
+      GithubRepos.insert({name: repo.name, url: repo.html_url, updated: repo.updated_at, description: repo.description});
     }
-    return _.flatten(reposResult[0], true);
+    return currentRepos;
   },
+  // getRepos: function() {
+  //   //make API call
+  //   function makeGitHubApiCall(callback) {
+  //       var allRepos = [];
+  //       var getRepos = function(error, result) {
+  //           allRepos.push(result);
+  //           if (github.hasNextPage(result)) {
+  //               github.getNextPage(result, getRepos);
+  //           } else {
+  //               return callback(null, allRepos);
+  //           }
+  //       }
+  //       github.repos.getFromUser({user: "seann1"}, function(err,res) {
+
+  //         for(var i = 0; i < res[0].length; i++)
+  //         { 
+  //           console.log({git: _.flatten(reposResult[0])[i].name});
+  //         }
+  //       });
+  //       //console.log(gitResult);
+  //   };
+
+  //   github.repos.getFromUser({user: "seann1"}, function(err,res) {
+  //     var counter = 0;
+  //     var allRepos = [];
+      
+  //     for(var i = 0; i < res.length; i++)
+  //         { 
+  //           counter += 1;
+  //           console.log(res[i].name);
+  //         }
+  //     if (github.hasNextPage(res)) {
+  //       github.getNextPage(res, function(err,res) {
+  //         for(var i = 0; i < res.length; i++)
+  //         { 
+  //           counter += 1;
+  //           console.log(res[i].name);
+  //         }
+  //       });
+  //     };
+  //     github.getLastPage(res, function(err,res) {
+  //       for(var i = 0; i < res.length; i++)
+  //       { 
+  //         counter += 1;
+  //         console.log(res[i].name);
+  //       }
+  //     });
+  //     console.log(counter);
+  //   });
+    //var reposContent = Meteor.wrapAsync(makeGitHubApiCall);
+    //var reposResult = reposContent();
+    //console.log("hi");
+    //console.log(reposResult[0]);
+    //GithubRepos.remove({});
+    //var currentRepos = [];
+    // for(var i = 0; i < reposResult[0].length; i++)
+    // { 
+    //   currentRepos.push({git: _.flatten(reposResult[0])[i].name, date: new Date()});
+    //   GithubRepos.insert({git: _.flatten(reposResult[0])[i].name, date: new Date()});
+    // }
+    // return _.flatten(reposResult[0], true);
   getEvents: function() {
 
     function makeGithubEventCall(callback) {
@@ -66,25 +131,29 @@ Meteor.methods({
                   commitNum = 0
               } else {
                   commitNum = commitObject.payload.commits.length;
-                  console.log(commitObject);
               }
 
               if (commitHistory.length === 0) {
                   commitHistory.push({"date": moment(commitObject.created_at, moment.ISO_8601).format("MM-DD-YYYY"), "number": commitNum})
               } else {
-                  var currentDateAddOne = moment(commitObject.created_at, moment.ISO_8601).add('days', 1).format("MM-DD-YYYY");
-                  var currentDateSubtractOne = moment(commitHistory[commitHistory.length-1].date, "MM-DD-YYYY").subtract('days', 1).format("MM-DD-YYYY");
+                  var currentDateAddOne = moment(commitObject.created_at, moment.ISO_8601)
+                                          .add('days', 1)
+                                          .format("MM-DD-YYYY");
+
+                  var currentDateSubtractOne = moment(commitHistory[commitHistory.length-1].date, "MM-DD-YYYY")
+                                              .subtract('days', 1)
+                                              .format("MM-DD-YYYY");
+
                   var endOfCHistory = commitHistory[commitHistory.length-1];
 
                   if (moment(commitObject.created_at, moment.ISO_8601).format("MM-DD-YYYY") === endOfCHistory.date) {
-                      console.log("same");
                       endOfCHistory.number += commitNum;
                   } else {
                       commitHistory.push({"date": moment(commitObject.created_at, moment.ISO_8601).format("MM-DD-YYYY"), "number": commitNum});
                   }
               }
           });
-          console.log(commitHistory);
+
           return commitHistory;
       }
 

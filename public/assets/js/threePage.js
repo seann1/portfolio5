@@ -2046,15 +2046,22 @@ var geometry = new THREE.TextGeometry("Sean Niesen", {
 					curveSegments: 30,
 					font: "helvetiker"});
 
-var material = new THREE.ShaderMaterial( {
-		uniforms: uniforms,
-		attributes: attributes,
-		vertexShader: Shader['client/shaders/vertex2'], //document.getElementById( 'vertexShader' ).textContent,
-		fragmentShader: Shader['client/shaders/fragment2'] //document.getElementById( 'fragmentShader' ).textContent
+//var material = new THREE.ShaderMaterial( {
+		//uniforms: uniforms,
+		//attributes: attributes
+		//vertexShader: Shader['client/shaders/vertex2'], 
+		//document.getElementById( 'vertexShader' ).textContent,
+		//fragmentShader: Shader['client/shaders/fragment2'] 
+		//document.getElementById( 'fragmentShader' ).textContent
 		//vertexShader: document.getElementById( 'vertexShader' ).textContent,
 		//fragmentShader: document.getElementById( 'fragmentShader' ).textContent
 
-	});
+	//});
+var material = new THREE.MeshPhongMaterial( { 
+    color: 0x996633, 
+    specular: 0x050505,
+    shininess: 100
+});
 
 var cube = new THREE.Mesh( geometry, material );
 
@@ -2072,7 +2079,7 @@ scene.add( cube );
 
 cube.position.x = -25;
 cube.position.y = -2;
-cube.position.z = -20;
+cube.position.z = -30;
 
     var x = 200;
     var y = 180;
@@ -2117,9 +2124,9 @@ var render = function () {
 	requestAnimationFrame( render );
 
 	//if (cube.rotation.x < 0.6) {
-		cube.rotation.x += 0.0005;
-		cube.position.z += 0.002;
-		cube.position.y += 0.0005;
+		cube.rotation.x += 0.000005;
+		cube.position.z += 0.00002;
+		cube.position.y += 0.000005;
 	//}
 
 	renderer.render(scene, camera);

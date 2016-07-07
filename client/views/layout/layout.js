@@ -6,23 +6,23 @@ Meteor.startup(function() {
   	Session.set('contact', false);
   	Session.set('threeLoaded', false);
 
-	Meteor.call("getRepos", function(error,result){
-    	Session.set("repos", result);
-    });
-    Meteor.call("getEvents", function(error, result){
-    	Session.set("commits", result);
-    });
+	//  Meteor.call("getRepos", function(error,result){
+ 	// 		Session.set("repos", result);
+ 	//	});
+ 	//  Meteor.call("getEvents", function(error, result){
+ 	//  	Session.set("commits", result);
+ 	//  });
 
-	Meteor.call("setupGitRepos", function(error, result) {
-		//console.log(result);
-		Session.set("repos", result);
-		Session.set("reposLoaded", true);
-	});
-	Meteor.call("setupGitEvents", function(error,result) {
-		//console.log(result);
-		Session.set("commits", result.events);
-		Session.set("eventsLoaded", true);
-	});
+	// Meteor.call("setupGitRepos", function(error, result) {
+	// 	console.log(result);
+	// 	Session.set("repos", result);
+	// 	Session.set("reposLoaded", true);
+	// });
+	// Meteor.call("setupGitEvents", function(error,result) {
+	// 	//console.log(result);
+	// 	Session.set("commits", result.events);
+	// 	Session.set("eventsLoaded", true);
+	// });
 });
 
 Template.layout.onRendered(function() {
@@ -33,7 +33,6 @@ Template.layout.onRendered(function() {
 
 	setTimeout(function() {
 			Session.set('threeLoaded', true);
-			console.log(Session.get('threeLoaded'));
 	}, 700);
 });
 
@@ -65,10 +64,10 @@ Template.layout.events({
 		if (!$(".zmdi-arrow-left").hasClass("spinEffect")) {
 			$(".zmdi-arrow-left").addClass("spinEffect");
 			$(".zmdi-arrow-left").removeClass("reverseSpin");
-				setTimeout(function() {
-					$(".zmdi-arrow-left").addClass("rotated");
+			setTimeout(function() {
+				$(".zmdi-arrow-left").addClass("rotated");
 
-				}, 450);
+			}, 450);
 		} else {
 			$(".zmdi-arrow-left").addClass("reverseSpin");
 			setTimeout(function() {
@@ -186,9 +185,9 @@ Template.layout.events({
 				$(".menuItem1").animate({top: "90px", height: "-=40", fontSize: ".5em", right: "+=400px", backgroundColor: "#ddd"}, 500);
 			//if about is chosen
 			} else if ($(".menuItem2").hasClass("arf")) {
-				$(".menuItem2").animate({top: "350px", width: "+=200", height: "+=40", fontSize: "1em", backgroundColor: "#ddd", right: "-=400"}, 1000);
-				$(".menuItem1").animate({width: "-=200"});
-				$(".menuItem1").animate({top: "90px", height: "-=40", fontSize: ".5em", right: "+=400px", backgroundColor: "#ddd"}, 500);
+				$(".menuItem3").animate({top: "350px", width: "+=200", height: "+=40", fontSize: "1em", backgroundColor: "#ddd", right: "-=400"}, 1000);
+				$(".menuItem2").animate({width: "-=200"});
+				$(".menuItem2").animate({top: "140px", height: "-=40", fontSize: ".5em", right: "+=400px", backgroundColor: "#ddd"}, 500);
 			}
 		}
 		Session.set('portfolio', false);
