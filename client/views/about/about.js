@@ -67,18 +67,18 @@ Template.about.helpers({
 		}
 	},
 	'repoNumber': function() {
-		return Session.get("repos").length + 1;
+		return Session.get("repos").length;
 	},
 	'recentCommitMessage': function() {
-		return Session.get("commits").unsorted[0].payload.commits[0].message;
+		return Session.get("recentCommitMessage");
 	},
 	'recentCommitRepo': function() {
-		return Session.get("commits").unsorted[0].repo.name;
+		return Session.get("recentCommitRepo");
 	},
 	'recentCommitDate': function() {
-		return moment(Session.get("commits").unsorted[0].created_at, moment.ISO_8601).format("MMMM Do YYYY");
+		return Session.get("recentCommitDate");
 	},
 	'githubAvatarLink': function() {
-		return Session.get("commits").unsorted[0].actor.avatar_url;
+		return Session.get("avatar");
 	}
 });

@@ -30,12 +30,12 @@ Meteor.methods({
     var reposResult = reposContent();
     GithubRepos.remove({});
 
-    console.log(JSON.stringify(_.flatten(reposResult)[0]));
+    //console.log(JSON.stringify(_.flatten(reposResult)[0]));
 
     var currentRepos = [];
     for(var i = 0; i < _.flatten(reposResult).length; i++)
     { 
-      console.log(_.flatten(reposResult)[i].name);
+      //console.log(_.flatten(reposResult)[i].name);
       var repo = _.flatten(reposResult)[i];
       var repoObject = {name: repo.name, 
                         url: repo.html_url, 
@@ -71,6 +71,13 @@ Meteor.methods({
     var userEvents = Meteor.wrapAsync(makeGithubEventCall);
     var eventsResult = _.flatten(userEvents()).reverse();
 
+    //saving most recent commit
+    var recentCommit = eventsResult[eventsResult.length-1];
+    RecentCommit.remove({});
+    RecentCommit.insert(recentCommit);
+
+    // end saving most recent commit
+
     function sortCommits(data) {
       var commitHistory = [];
       for (i=0;i<=90;i++) {
@@ -85,20 +92,24 @@ Meteor.methods({
           };
         });
       });
-      console.log(commitHistory);
+      //console.log(commitHistory);
       return commitHistory;
     };
-    
-    _.each(eventsResult, function(i) {
-      if (i.payload.commits === undefined) {
-        i.payload.commits = [];
-      }
-      console.log({date: i.created_at, number: i.payload.commits.length});
-    });
+
+    // _.each(eventsResult, function(i) {
+    //   if (i.payload.commits === undefined) {
+    //     i.payload.commits = [];
+    //   }
+    //   console.log({date: i.created_at, number: i.payload.commits.length});
+    // });
 
     sortCommits(eventsResult);
     GithubEvents.remove({});
     GithubEvents.insert(eventsResult);
+
+    //Avatar
+    Avatar.remove({});
+    Avatar.insert({avatar: eventsResult[eventsResult.length-1].actor.avatar_url});
     return eventsResult;
   }
 });

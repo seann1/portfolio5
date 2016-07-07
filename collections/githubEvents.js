@@ -11,18 +11,5 @@ Meteor.methods({
             return currentGitObject; 
         }
 
-    },
-    cleanupGitEvents: function() {
-        // if (GithubEvents.find().count() > 2) {
-        //     _.map(events.splice(0,1), function(value) {
-        //         GithubEvents.remove({ _id : value._id });
-        //     });
-        // }
-
-        // if (GithubRepos.find().count() > 2) {
-        //     _.map(events.splice(0,1), function(value) {
-        //         GithubRepos.remove({ _id : value._id });
-        //     });
-        // }
     }
 });

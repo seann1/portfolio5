@@ -13,11 +13,20 @@ Meteor.startup(function() {
  	//  	Session.set("commits", result);
  	//  });
 
-	// Meteor.call("setupGitRepos", function(error, result) {
-	// 	console.log(result);
-	// 	Session.set("repos", result);
-	// 	Session.set("reposLoaded", true);
-	// });
+ 	Meteor.call("setupAvatar", function(error, result) {
+ 		Session.set("avatar", result);
+ 	});
+ 	Meteor.call("setupRecentCommit", function(error, result) {
+ 		Session.set("recentCommitMessage", result.payload.commits[0].message);
+ 		Session.set("recentCommitRepo", result.repo);
+ 		Session.set("recentCommitDate", moment(result.created_at, moment.ISO_8601).utc().format("MMMM Do YYYY"));
+ 	});
+
+	Meteor.call("setupGitRepos", function(error, result) {
+		console.log(result);
+		Session.set("repos", result);
+		Session.set("reposLoaded", true);
+	});
 	// Meteor.call("setupGitEvents", function(error,result) {
 	// 	//console.log(result);
 	// 	Session.set("commits", result.events);
