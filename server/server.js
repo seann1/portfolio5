@@ -30,25 +30,24 @@ Meteor.methods({
     var reposResult = reposContent();
     GithubRepos.remove({});
 
-    //console.log(JSON.stringify(_.flatten(reposResult)[0]));
-
     var currentRepos = [];
     for(var i = 0; i < _.flatten(reposResult).length; i++)
     { 
-      //console.log(_.flatten(reposResult)[i].name);
       var repo = _.flatten(reposResult)[i];
       var repoObject = {name: repo.name, 
                         url: repo.html_url, 
-                        updated: repo.updated_at, 
-                        description: repo.description
+                        updated_at: repo.updated_at, 
+                        description: repo.description,
+                        created_at: repo.created_at
                       };
       
       currentRepos.push(repoObject);
 
       GithubRepos.insert({name: repo.name, 
                           url: repo.html_url, 
-                          updated: repo.updated_at, 
-                          description: repo.description
+                          updated_at: repo.updated_at, 
+                          description: repo.description,
+                          created_at: repo.created_at
                         });
     }
     return currentRepos;
@@ -113,35 +112,3 @@ Meteor.methods({
     return eventsResult;
   }
 });
-
-//_.each(data, function(commitObject) {
-  //vars
-    //var commitNum,
-    //commitObjDate = moment(commitObject.created_at, moment.ISO_8601).format("MM-DD-YYYY");
-    //console.log(commitObjDate);
-    // if (commitObject.payload.commits === undefined) {
-    //     commitNum = 0
-    // } else {
-    //     commitNum = commitObject.payload.commits.length;
-    // }
-
-    // if (commitHistory.length === 0) {
-    //     commitHistory.push({"date": commitObjDate, "number": commitNum})
-    // } else {
-    //     var currentDateAddOne = moment(commitObject.created_at, moment.ISO_8601)
-    //                             .add('days', 1)
-    //                             .format("MM-DD-YYYY");
-
-    //     var currentDateSubtractOne = moment(commitHistory[commitHistory.length-1].date, "MM-DD-YYYY")
-    //                                 .subtract('days', 1)
-    //                                 .format("MM-DD-YYYY");
-
-    //     var endOfCHistory = commitHistory[commitHistory.length-1];
-
-    //     if (commitObjDate === endOfCHistory.date) {
-    //         endOfCHistory.number += commitNum;
-    //     } else {
-    //         commitHistory.push({"date": commitObjDate, "number": commitNum});
-    //     }
-    // }
-//});

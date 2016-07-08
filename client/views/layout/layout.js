@@ -18,7 +18,7 @@ Meteor.startup(function() {
  	});
  	Meteor.call("setupRecentCommit", function(error, result) {
  		Session.set("recentCommitMessage", result.payload.commits[0].message);
- 		Session.set("recentCommitRepo", result.repo);
+ 		Session.set("recentCommitRepo", result.repo.name);
  		Session.set("recentCommitDate", moment(result.created_at, moment.ISO_8601).utc().format("MMMM Do YYYY"));
  	});
 
@@ -27,18 +27,17 @@ Meteor.startup(function() {
 		Session.set("repos", result);
 		Session.set("reposLoaded", true);
 	});
-	// Meteor.call("setupGitEvents", function(error,result) {
-	// 	//console.log(result);
-	// 	Session.set("commits", result.events);
-	// 	Session.set("eventsLoaded", true);
-	// });
+	Meteor.call("setupGitEvents", function(error,result) {
+		Session.set("commits", result.events);
+		Session.set("eventsLoaded", true);
+	});
 });
 
 Template.layout.onRendered(function() {
 
 	$(".headSection").css("height", "400px");
 	$(".headSection > canvas").css("height", "400px");
-	Session.set('portfolio', false);
+	//Session.set('portfolio', false);
 
 	setTimeout(function() {
 			Session.set('threeLoaded', true);
