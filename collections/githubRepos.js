@@ -4,8 +4,6 @@ Meteor.methods({
 	setupGitRepos: function() {
         var repos = GithubRepos.find({}).fetch();
 
-        var currentGitObject = repos;
-
-        return currentGitObject; 
+        return repos; 
     }
 });

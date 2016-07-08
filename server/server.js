@@ -104,7 +104,7 @@ Meteor.methods({
 
     sortCommits(eventsResult);
     GithubEvents.remove({});
-    GithubEvents.insert(eventsResult);
+    GithubEvents.insert({commits: sortCommits(eventsResult)});
 
     //Avatar
     Avatar.remove({});

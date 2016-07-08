@@ -6,13 +6,6 @@ Meteor.startup(function() {
   	Session.set('contact', false);
   	Session.set('threeLoaded', false);
 
-	//  Meteor.call("getRepos", function(error,result){
- 	// 		Session.set("repos", result);
- 	//	});
- 	//  Meteor.call("getEvents", function(error, result){
- 	//  	Session.set("commits", result);
- 	//  });
-
  	Meteor.call("setupAvatar", function(error, result) {
  		Session.set("avatar", result);
  	});
@@ -21,14 +14,13 @@ Meteor.startup(function() {
  		Session.set("recentCommitRepo", result.repo.name);
  		Session.set("recentCommitDate", moment(result.created_at, moment.ISO_8601).utc().format("MMMM Do YYYY"));
  	});
-
 	Meteor.call("setupGitRepos", function(error, result) {
-		console.log(result);
 		Session.set("repos", result);
 		Session.set("reposLoaded", true);
 	});
 	Meteor.call("setupGitEvents", function(error,result) {
-		Session.set("commits", result.events);
+		console.log(result);
+		Session.set("commits", result);
 		Session.set("eventsLoaded", true);
 	});
 });

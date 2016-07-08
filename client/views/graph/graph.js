@@ -89,9 +89,9 @@ Template.graph.onRendered(function() {
 
 	this.autorun(function() {
 		if (Session.get("commits") != undefined) {
-			var data = Session.get("commits").sorted.reverse();
+			var data = Session.get("commits");
 			console.log(["data", JSON.stringify(data)]);
-			createGraph(data);
+			createGraph(data.commits);
 		}
 	});
 });
