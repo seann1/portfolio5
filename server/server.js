@@ -40,6 +40,10 @@ Meteor.methods({
                         description: repo.description,
                         created_at: repo.created_at
                       };
+      var pieGraphObject = {
+                      name: repo.name,
+                      commits: repo.payload.commits.length
+                      };
       
       currentRepos.push(repoObject);
 

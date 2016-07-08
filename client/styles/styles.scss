@@ -343,10 +343,19 @@ svg {
 }
 
 .d3Vis {
-	max-width: 100%;
+	max-width: 90%;
 	height: 160px;
 	//background-color: rgba(0,0,0,0.5);
-	margin-left: 30px;
+	margin-left: 35px;
+	padding-right: 50;
+}
+
+.d3PieChart {
+	max-width: 90%;
+	height: 160px;
+	//background-color: rgba(0,0,0,0.5);
+	margin-left: 35px;
+	padding-right: 50;
 }
 
 .axis path,
@@ -412,4 +421,18 @@ svg {
 	font-style: bold;
 	font-size: 2em;
 	color: #ffbf00;
+}
+
+.graphPadding {
+	padding-left: 20px;
+}
+
+//pie chart styles
+.arc text {
+  font: 10px sans-serif;
+  text-anchor: middle;
+}
+
+.arc path {
+  stroke: #fff;
 }
