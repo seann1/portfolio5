@@ -29,8 +29,6 @@ Meteor.methods({
     var reposContent = Meteor.wrapAsync(makeGitHubApiCall);
     var reposResult = reposContent();
 
-    GithubRepos.remove({});
-
     function getCommits(repoName) {
       var url = "https://github.com/seann1/" + repoName;
       var result = Meteor.http.get(url);
@@ -38,6 +36,9 @@ Meteor.methods({
       var commits = $('.commits span').text();
       return commits;
     }
+
+    GithubRepos.remove({});
+    PieChartData.remove({});
 
     var currentRepos = [];
     for(var i = 0; i < _.flatten(reposResult).length; i++)
@@ -53,7 +54,6 @@ Meteor.methods({
                       };
       
       currentRepos.push(repoObject);
-      GithubRepos.insert(repo);
       GithubRepos.insert({name: repo.name, 
                           url: repo.html_url, 
                           updated_at: repo.updated_at, 
@@ -61,6 +61,7 @@ Meteor.methods({
                           created_at: repo.created_at,
                           commits: commits
                         });
+      PieChartData.insert({name: repo.name, commits: commits});
     }
     return currentRepos;
   },
