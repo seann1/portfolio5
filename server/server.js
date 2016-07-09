@@ -8,7 +8,6 @@ if (Meteor.isServer) {
       username: Meteor.settings.gitUserName,
       password: Meteor.settings.gitPassword
   });
-  //Meteor.npmRequire("jquery");
 }
 
 Meteor.methods({
@@ -29,7 +28,7 @@ Meteor.methods({
 
     var reposContent = Meteor.wrapAsync(makeGitHubApiCall);
     var reposResult = reposContent();
-    //console.log(reposResult);
+
     GithubRepos.remove({});
 
     function getCommits(repoName) {
@@ -87,7 +86,6 @@ Meteor.methods({
     var recentCommit = eventsResult[eventsResult.length-1];
     RecentCommit.remove({});
     RecentCommit.insert(recentCommit);
-
     // end saving most recent commit
 
     function sortCommits(data) {
@@ -104,7 +102,7 @@ Meteor.methods({
           };
         });
       });
-      //console.log(commitHistory);
+
       return commitHistory;
     };
 
