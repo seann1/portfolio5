@@ -13,7 +13,6 @@ fourseven:scss
 raix:shader
 mizzao:jquery-ui
 bruz:github-api
-meteorhacks:npm
 
 
 ixdi:material-design-iconic-font
@@ -37,3 +36,5 @@ check
 
 
 npm-container
+http
+rclai89:cheerio

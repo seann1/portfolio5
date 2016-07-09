@@ -8,6 +8,7 @@ if (Meteor.isServer) {
       username: Meteor.settings.gitUserName,
       password: Meteor.settings.gitPassword
   });
+  //Meteor.npmRequire("jquery");
 }
 
 Meteor.methods({
@@ -28,30 +29,38 @@ Meteor.methods({
 
     var reposContent = Meteor.wrapAsync(makeGitHubApiCall);
     var reposResult = reposContent();
+    //console.log(reposResult);
     GithubRepos.remove({});
+
+    function getCommits(repoName) {
+      var url = "https://github.com/seann1/" + repoName;
+      var result = Meteor.http.get(url);
+      var $ = cheerio.load(result.content);
+      var commits = $('.commits span').text();
+      return commits;
+    }
 
     var currentRepos = [];
     for(var i = 0; i < _.flatten(reposResult).length; i++)
     { 
       var repo = _.flatten(reposResult)[i];
+      var commits = getCommits(repo.name).toString().replace(/\D/g,'');
       var repoObject = {name: repo.name, 
                         url: repo.html_url, 
                         updated_at: repo.updated_at, 
                         description: repo.description,
-                        created_at: repo.created_at
-                      };
-      var pieGraphObject = {
-                      name: repo.name,
-                      commits: repo.payload.commits.length
+                        created_at: repo.created_at,
+                        commits: commits
                       };
       
       currentRepos.push(repoObject);
-
+      GithubRepos.insert(repo);
       GithubRepos.insert({name: repo.name, 
                           url: repo.html_url, 
                           updated_at: repo.updated_at, 
                           description: repo.description,
-                          created_at: repo.created_at
+                          created_at: repo.created_at,
+                          commits: commits
                         });
     }
     return currentRepos;
