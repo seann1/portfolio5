@@ -61,7 +61,7 @@ Meteor.methods({
                           created_at: repo.created_at,
                           commits: commits
                         });
-      PieChartData.insert({name: repo.name, commits: commits});
+      PieChartData.insert({name: repo.name, commits: Number(commits)});
     }
     return currentRepos;
   },

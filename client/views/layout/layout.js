@@ -19,10 +19,10 @@ Meteor.startup(function() {
 		Session.set("reposLoaded", true);
 	});
 	Meteor.call("setupPieChartData", function(error, result) {
+		console.log(result);
 		Session.set("pieChartData", result);
 	});
 	Meteor.call("setupGitEvents", function(error,result) {
-		console.log(result);
 		Session.set("commits", result);
 		Session.set("eventsLoaded", true);
 	});
