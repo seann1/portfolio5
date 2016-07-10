@@ -8,10 +8,19 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-1">
+		<div class="col-md-2">
 		</div>
-		<div class="col-md-8">
+		<div class="col-md-5">
 			<div class="d3PieChart">
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="linksBox">
+				{{#each githubLink in githubLinks}}
+					<div>
+						<a class="linkBoxLink" href="{{githubLink.url}}" target="_Blank">{{githubLink.name}}</a>
+					</div>
+				{{/each}}
 			</div>
 		</div>
 	</div>

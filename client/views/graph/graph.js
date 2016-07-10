@@ -1,3 +1,11 @@
+Template.graph.helpers({
+	'githubLinks': function() {
+		console.log(Session.get("repos"));
+		return Session.get("repos");
+	}
+
+});
+
 Template.graph.onRendered(function() {
 
 	function createGraph(data) {
@@ -135,7 +143,7 @@ Template.graph.onRendered(function() {
             // }));                                                        // NEW
             //var percent = Math.round(1000 * d.commits / total) / 10; // NEW
             tooltip.select('.label').html(d.data.name);                // NEW
-            tooltip.select('.commits').html(d.data.commits);                // NEW             // NEW
+            tooltip.select('.commits').html(d.data.commits + "Commits");                // NEW             // NEW
             tooltip.style('display', 'block');                          // NEW
           });                                                           // NEW
           

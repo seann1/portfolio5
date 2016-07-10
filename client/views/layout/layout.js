@@ -7,7 +7,8 @@ Meteor.startup(function() {
   	Session.set('threeLoaded', false);
 
  	Meteor.call("setupAvatar", function(error, result) {
- 		Session.set("avatar", result);
+ 		//console.log(result[0].avatar);
+ 		Session.set("avatar", result[0].avatar);
  	});
  	Meteor.call("setupRecentCommit", function(error, result) {
  		Session.set("recentCommitMessage", result.payload.commits[0].message);
@@ -19,7 +20,6 @@ Meteor.startup(function() {
 		Session.set("reposLoaded", true);
 	});
 	Meteor.call("setupPieChartData", function(error, result) {
-		console.log(result);
 		Session.set("pieChartData", result);
 	});
 	Meteor.call("setupGitEvents", function(error,result) {
