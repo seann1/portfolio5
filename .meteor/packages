@@ -20,7 +20,6 @@ natestrauser:animate-css
 momentjs:moment
 davidfrancisco:twemoji
 d3js:d3
-standard-minifiers
 meteor-base
 mobile-experience
 mongo
@@ -38,3 +37,5 @@ check
 npm-container
 http
 rclai89:cheerio
+standard-minifier-css
+standard-minifier-js
