@@ -65,6 +65,7 @@ natestrauser:animate-css@3.5.1
 npm-mongo@1.4.43
 observe-sequence@1.0.11
 ordered-dict@1.0.7
+pauldowman:dotenv@1.0.1
 promise@0.6.7
 raix:shader@0.0.0
 random@1.0.9

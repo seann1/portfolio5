@@ -5,8 +5,10 @@ if (Meteor.isServer) {
 
   github.authenticate({
       type: "basic",
-      username: Meteor.settings.gitUserName,
-      password: Meteor.settings.gitPassword
+      username: process.env.GIT_USERNAME,
+      password: process.env.GIT_PASSWORD
+      //username: Meteor.settings.gitUserName,
+      //password: Meteor.settings.gitPassword
   });
 }
 
