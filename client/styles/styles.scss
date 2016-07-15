@@ -114,6 +114,7 @@ h2 {
 	top: 0px;
 	right: 0px;
 	cursor: pointer;
+	z-index:1000;
 }
 
 .zmdi-arrow-left {
@@ -480,9 +481,47 @@ background: #ccc;
 }
 
 .cokeApp {
-	height: 300px;
-	background-color: pink;
-	border-color: black;
-	border-width: 2px;
-	border-style: solid;
+	.innerDiv {
+		a {
+			color: white;
+			font-size: 2em;
+			font-weight: bold;
+			&:hover {
+				text-decoration: none;
+				color: #ffb600;
+			}
+			&:visited {
+				text-decoration: none;
+			}
+		}
+		p {
+			color: white;
+		}
+		height: 300px;
+		background-color: black;
+		margin: 6px 3px 6px 3px;
+		padding: 5px;
+		color: white;
+	}
+	.innerDivWide {
+		a {
+			color: white;
+			font-size: 2em;
+			font-weight: bold;
+			&:hover {
+				text-decoration: none;
+				color: #ffb600;
+			}
+			&:visited {
+				text-decoration: none;
+			}
+		}
+		p {
+			color: white;
+		}
+		height: 100px;
+		background-color: black;
+		margin: 5px;
+		color: white;
+	}
 }

@@ -39,3 +39,5 @@ rclai89:cheerio
 standard-minifier-css
 standard-minifier-js
 pauldowman:dotenv
+rubaxa:sortable
+mrt:moment-timezone

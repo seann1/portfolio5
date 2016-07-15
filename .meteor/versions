@@ -16,6 +16,7 @@ callback-hook@1.0.8
 check@1.2.1
 d3js:d3@3.5.8
 davidfrancisco:twemoji@1.5.0
+dburles:mongo-collection-instances@0.3.4
 ddp@1.2.5
 ddp-client@1.2.7
 ddp-common@1.2.5
@@ -44,6 +45,7 @@ iron:router@1.0.13
 iron:url@1.0.11
 ixdi:material-design-iconic-font@2.1.5
 jquery@1.11.8
+lai:collection-extensions@0.1.4
 launch-screen@1.0.11
 livedata@1.0.18
 logging@1.0.12
@@ -61,6 +63,8 @@ modules-runtime@0.6.3
 momentjs:moment@2.14.1
 mongo@1.1.7
 mongo-id@1.0.4
+mrt:moment@2.8.1
+mrt:moment-timezone@0.2.1
 natestrauser:animate-css@3.5.1
 npm-mongo@1.4.43
 observe-sequence@1.0.11
@@ -75,6 +79,7 @@ reactive-var@1.0.9
 reload@1.1.8
 retry@1.0.7
 routepolicy@1.0.10
+rubaxa:sortable@1.3.0
 session@1.1.5
 spacebars@1.0.11
 spacebars-compiler@1.0.11

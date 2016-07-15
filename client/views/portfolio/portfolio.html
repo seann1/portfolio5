@@ -1,11 +1,29 @@
 <template name="portfolio">
 	<div class='row portfolioHtml'>
-		<div class='col-md-4 test cokeApp'><a href="https://coca-cola-twitter.herokuapp.com/" target="_BLANK">Twitter Api Coca Cola</a></div>
 		<div class='col-md-4 test cokeApp'>
-			<a href="https://coca-cola-twitter.herokuapp.com/" target="_BLANK">Twitter Api Coca Cola</a>
+			<div class="innerDiv">
+				<a href="https://coca-cola-twitter.herokuapp.com/" target="_BLANK">Twitter Api Coca Cola</a>
+				<p>A visulaization that displays tweets with #CocaCola. This app uses Ruby on Rails, the Twitter API, and JavaScript.</p>
+			</div>
 		</div>
 		<div class='col-md-4 test cokeApp'>
-			<a href="https://coca-cola-twitter.herokuapp.com/" target="_BLANK">Twitter Api Coca Cola</a>
+			<div class="innerDiv">
+				<a href="https://seann1.github.io/sunrise/" target="_BLANK">Sunrise Tracker</a>
+				<p>An Angular app that uses the D3 JavaScript library to graph out the times of sunrise and sunset for a given location. Since building this app, Google has added the requiremnt of a key to use the Google Maps API. This app won't work again until I figure out how to deploy it with the key stored in an environment variable, and doing that might require adding a server to the application.</p>
+			</div>
+		</div>
+		<div class='col-md-4 test cokeApp'>
+			<div class="innerDiv">
+				<a href="https://seann1.github.io/csv/public/" target="_BLANK">CSV Datum Generator</a>
+				<p>This project started with two inputs, the user could enter a list of codes and a list of display values and the app would produce a ist of "datums" which are XML tags that we use at my current job. I then converted it to read the datums from an uploaded CSV file, then tried to supply a sample CSV file on the app to demonstrate how it works, but found that it is a security risk to embed a CSV file in an HTML page. I then started experimenting with ThreeJS on this app.</p>
+			</div>
+		</div>
+	</div>
+	<div class='row portfolioHtml'>
+		<div class="cokeApp">
+			<div class="innerDivWide">
+				<div class='col-md-12 test cokeApp'><a href="https://seann1.github.io/" target="_BLANK">Previous Portfolio Website</a></div>
+			</div>
 		</div>
 	</div>
 </template>
