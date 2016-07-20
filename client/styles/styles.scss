@@ -428,23 +428,23 @@ svg {
 	padding-left: 20px;
 }
 
-.d3PieChart {                                                          /* NEW */
-	height: 360px;                                                  /* NEW */
-	position: relative;                                             /* NEW */
-	width: 360px;                                                   /* NEW */
-}                                                                 /* NEW */
-.pieTooltip {                                                        /* NEW */
-    background-color: rgba(238, 238, 238, 0.5);                                               /* NEW */
-    //box-shadow: 0 0 5px #999999;                                    /* NEW */
-    color: #333;                                                    /* NEW */
-    display: none;                                                  /* NEW */
-    font-size: 12px;                                                /* NEW */
-    left: 130px;                                                    /* NEW */
-    padding: 10px;                                                  /* NEW */
-    position: absolute;                                             /* NEW */
-    //text-align: center;                                             /* NEW */
-    top: 95px;                                                      /* NEW */
-    width: 210px;                                                    /* NEW */
+.d3PieChart {
+	height: 360px;                             
+	position: relative;                        
+	width: 360px;                              
+}                                              
+.pieTooltip {                                  
+    background-color: rgba(238, 238, 238, 0.5);
+    //box-shadow: 0 0 5px #999999;             
+    color: #333;                               
+    display: none;                             
+    font-size: 12px;                           
+    left: 130px;                               
+    padding: 10px;                             
+    position: absolute;                        
+    //text-align: center;                      
+    top: 95px;                                 
+    width: 210px;                              
     z-index: 10;
     //border-radius: 5px;
     .label {
@@ -456,8 +456,8 @@ svg {
     .commits {
     	opacity: 1.0;
     	padding-left: 7px;
-    }                                                  /* NEW */
-}                                                                 /* NEW */
+    }   
+}           
 .legend {
 	font-size: 12px;
 }
@@ -470,7 +470,7 @@ overflow: auto;
 //position: fixed;
 //top: 100px;
 //left: 200px;
-//width: 200px;
+margin-bottom: 10px;
 height: 350px;
 background: #ccc;
 	.linkBoxLink {
@@ -524,4 +524,10 @@ background: #ccc;
 		margin: 5px;
 		color: white;
 	}
+}
+
+.reposTitle {
+	font-weight: bold;
+	font-size: 1.5em;
+	color: black;
 }

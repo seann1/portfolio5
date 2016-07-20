@@ -143,7 +143,7 @@ Template.graph.onRendered(function() {
             // }));                                                        // NEW
             //var percent = Math.round(1000 * d.commits / total) / 10; // NEW
             tooltip.select('.label').html(d.data.name);                // NEW
-            tooltip.select('.commits').html(d.data.commits + "Commits");                // NEW             // NEW
+            tooltip.select('.commits').html(d.data.commits + " Commits");                // NEW             // NEW
             tooltip.style('display', 'block');                          // NEW
           });                                                           // NEW
           
