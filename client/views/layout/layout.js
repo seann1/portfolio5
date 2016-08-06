@@ -210,7 +210,7 @@ Template.layout.events({
 
 			$(".menuItem2").animate({top: "350px", height: "+=40", fontSize: "1em", backgroundColor: "#ddd"}, 500);
 			$(".menuItem3").animate({top: "450px", height: "+=40", fontSize: "1em", backgroundColor: "#ddd"}, 500);
-			$(".menuText1, .menuText2, .menuText3").animate({color: "#bbc107"}, 500);
+			$(".menuText1, .menuText2, .menuText3");
 		} else if ($(".menuItem2").hasClass("arf")) {
 			homeAnimation();
 			$(".menuItem1").delay(300).animate({top: "250px", width: "+=200", height: "+=40", fontSize: "1em", backgroundColor: "#ddd"}, 1000);
@@ -219,7 +219,7 @@ Template.layout.events({
 
 			$(".menuItem2").animate({top: "350px", fontSize: "1em", backgroundColor: "#ddd"}, 500).removeClass("arf");
 			$(".menuItem3").animate({top: "450px", height: "+=40", fontSize: "1em", backgroundColor: "#ddd"}, 500);
-			$(".menuText1, .menuText2, .menuText3").animate({color: "#bbc107"}, 500);
+			$(".menuText1, .menuText2, .menuText3");
 		} else if ($(".menuItem3").hasClass("arf")) {
 			homeAnimation();
 			$(".menuItem1").delay(300).animate({top: "250px", width: "+=200", height: "+=40", fontSize: "1em", backgroundColor: "#ddd"}, 1000);
@@ -228,7 +228,7 @@ Template.layout.events({
 
 			$(".menuItem3").animate({top: "450px", fontSize: "1em", backgroundColor: "#ddd"}, 500).removeClass("arf");
 			$(".menuItem2").animate({top: "350px", height: "+=40", fontSize: "1em", backgroundColor: "#ddd"}, 500);
-			$(".menuText1, .menuText2, .menuText3").animate({color: "#bbc107"}, 500);
+			$(".menuText1, .menuText2, .menuText3");
 		}
 	}
 });

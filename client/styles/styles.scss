@@ -89,7 +89,7 @@ h2 {
 .menuText1, .menuText2, .menuText3 {
 	font-size: 3em;
 	margin-left: 20px;
-	color: #bbc107;
+	color: black;
 	cursor: pointer;
 	// font-family: allerBold;
 }
@@ -109,7 +109,7 @@ h2 {
 .foldout {
 	height: 100px;
 	width: 100px;
-	background-color: #a5ff00;
+	background-color: white;
 	position: fixed;
 	top: 0px;
 	right: 0px;
@@ -119,7 +119,7 @@ h2 {
 
 .zmdi-arrow-left {
 	font-size: 6em;
-	color: #00b6ff;
+	color: black;
 	margin-left: 22px;
 	margin-top: 8px;
 	-webkit-transform: rotate(0deg);
@@ -315,12 +315,12 @@ svg {
 		font-size: 1em;
 		margin: 0px;
 		span {
-			color: #bada55;
+			color: white;
 			text-shadow: 2px 2px #000000;
 			font-size: 1.2em;
 		}
 		span.repoName {
-			color: #c6a1a1;
+			color: white;
 			font-weight: bold;
 		}
 	}
@@ -380,7 +380,7 @@ svg {
 	margin-top: 10px;
 	padding: 10px;
 	width: 100%;
-	background-color: #00b3e0;
+	background-color: #ddd;
 }
 
 .linkedinLink {
@@ -395,7 +395,13 @@ svg {
 	margin-top: 10px;
 	padding: 10px;
 	width: 100%;
-	background-color: #f7f7f7;
+	background-color: #ddd;
+}
+
+.githubContactAbout {
+	margin-top: 10px;
+	padding: 10px;
+	width: 100%;
 }
 
 .githubcontactLink {
@@ -410,7 +416,7 @@ svg {
 	margin-top: 10px;
 	padding: 10px;
 	width: 100%;
-	background-color: #b70000;
+	background-color: #ddd;
 }
 
 .emailLink {
@@ -421,7 +427,7 @@ svg {
 	cursor: pointer;
 	font-style: bold;
 	font-size: 2em;
-	color: #ffbf00;
+	color: black;
 }
 
 .graphPadding {
