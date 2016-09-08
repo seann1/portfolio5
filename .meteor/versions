@@ -66,6 +66,7 @@ mongo-id@1.0.4
 mrt:moment@2.8.1
 mrt:moment-timezone@0.2.1
 natestrauser:animate-css@3.5.1
+npm-container@1.2.0
 npm-mongo@1.4.43
 observe-sequence@1.0.11
 ordered-dict@1.0.7

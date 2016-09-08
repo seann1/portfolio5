@@ -41,3 +41,6 @@ standard-minifier-js
 pauldowman:dotenv
 rubaxa:sortable
 mrt:moment-timezone
+
+
+npm-container
